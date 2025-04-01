@@ -6,7 +6,9 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "format": "prettier --write .",
+    "format:check": "prettier --check ."
   },
   "dependencies": {
     "astro": "^5.5.6",
@@ -15,6 +17,8 @@
   },
   "devDependencies": {
     "@types/node": "^22.13.14",
-    "@types/qs": "^6.9.18"
+    "@types/qs": "^6.9.18",
+    "prettier": "^3.5.3",
+    "prettier-plugin-astro": "^0.14.1"
   }
 }
