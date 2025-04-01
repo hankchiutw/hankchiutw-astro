@@ -8,7 +8,47 @@ import MainLayout from '../layouts/MainLayout.astro';
 			<div class="profile-content">
 				<h1 class="profile-name">Hank Chiu</h1>
 				<h2 class="profile-title">Web Front-End Expert</h2>
-				<p class="profile-intro">A dedicated software engineer specializing in web front-end development, with valuable experience in back-end technologies. Committed to delivering high-quality solutions that align with business goals and enhance user experiences.</p>
+				<p class="profile-intro">Dedicated software engineer with expertise in web front-end development and valuable experience in back-end technologies. I continuously strive for elegant and efficient solutions while balancing business goals.</div>
+		</div>
+	</section>
+	
+	<section class="strengths-section">
+		<div class="section-header">
+			<h2 class="section-title"><i class="fas fa-star"></i> Core Strengths</h2>
+			<div class="section-divider"></div>
+		</div>
+		
+		<div class="strengths-grid">
+			<div class="strength-card">
+				<div class="strength-icon">
+					<i class="fas fa-sitemap"></i>
+				</div>
+				<h3>Architecture</h3>
+				<p>Strong architectural thinking, ensuring scalable and maintainable solutions across projects.</p>
+			</div>
+			
+			<div class="strength-card">
+				<div class="strength-icon">
+					<i class="fas fa-code"></i>
+				</div>
+				<h3>Clean Code</h3>
+				<p>Advocacy for clean code principles, promoting readability and maintainability in all work.</p>
+			</div>
+			
+			<div class="strength-card">
+				<div class="strength-icon">
+					<i class="fas fa-gauge-high"></i>
+				</div>
+				<h3>Performance</h3>
+				<p>Proficient in code refactoring techniques to improve quality and optimize performance.</p>
+			</div>
+			
+			<div class="strength-card">
+				<div class="strength-icon">
+					<i class="fas fa-users"></i>
+				</div>
+				<h3>Mentorship</h3>
+				<p>Experienced in mentoring and guiding fellow engineers to foster growth and collaboration.</p>
 			</div>
 		</div>
 	</section>
@@ -20,17 +60,17 @@ import MainLayout from '../layouts/MainLayout.astro';
 		</div>
 		<ul class="contact-list">
 			<li class="contact-item">
-				<span class="contact-icon"><i class="fas fa-map-marker-alt"></i></span>
+				<span class="contact-icon"><i class="fas fa-map-marker-alt fa-sm"></i></span>
 				<span class="contact-label">Location:</span>
 				<span class="contact-value">Taoyuan, Taiwan</span>
 			</li>
 			<li class="contact-item">
-				<span class="contact-icon"><i class="fas fa-phone-alt"></i></span>
+				<span class="contact-icon"><i class="fas fa-phone-alt fa-sm"></i></span>
 				<span class="contact-label">Phone:</span>
 				<span class="contact-value">+886-978-031073</span>
 			</li>
 			<li class="contact-item">
-				<span class="contact-icon"><i class="fas fa-envelope"></i></span>
+				<span class="contact-icon"><i class="fas fa-envelope fa-sm"></i></span>
 				<span class="contact-label">Email:</span>
 				<span class="contact-value">
 					<a href="mailto:hankchiu.tw@gmail.com">hankchiu.tw@gmail.com</a>
@@ -87,6 +127,65 @@ import MainLayout from '../layouts/MainLayout.astro';
 		line-height: 1.6;
 		color: var(--text-color);
 		padding: 0 1rem;
+	}
+
+	/* Strengths Section */
+	.strengths-section {
+		margin-bottom: 3rem;
+		max-width: var(--container-max);
+		margin-left: auto;
+		margin-right: auto;
+		padding: 0 1rem;
+	}
+	
+	.strengths-grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+		gap: 1.5rem;
+	}
+	
+	.strength-card {
+		background-color: var(--card-bg);
+		border-radius: var(--radius-md);
+		padding: 1.5rem;
+		box-shadow: 0 4px 10px var(--shadow-color);
+		transition: transform 0.3s ease, box-shadow 0.3s ease;
+		border: 1px solid var(--border-color);
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		text-align: center;
+	}
+	
+	.strength-card:hover {
+		transform: translateY(-5px);
+		box-shadow: 0 10px 20px var(--shadow-color);
+	}
+	
+	.strength-icon {
+		width: 50px;
+		height: 50px;
+		border-radius: 50%;
+		background-color: rgba(var(--primary-color-rgb), 0.12);
+		color: var(--primary-color);
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		margin-bottom: 1rem;
+		font-size: 1.5rem;
+	}
+	
+	.strength-card h3 {
+		color: var(--primary-color);
+		margin: 0 0 0.75rem 0;
+		font-size: clamp(1.1rem, 3vw, 1.25rem);
+	}
+	
+	.strength-card p {
+		margin: 0;
+		color: var(--text-color);
+		font-size: 0.95rem;
+		line-height: 1.5;
 	}
 
 	/* Contact Section */
@@ -259,6 +358,15 @@ import MainLayout from '../layouts/MainLayout.astro';
 		.cta-button {
 			max-width: 100%;
 		}
+
+		.strengths-grid {
+			grid-template-columns: repeat(2, 1fr);
+			gap: 1rem;
+		}
+		
+		.strength-card {
+			padding: 1.2rem;
+		}
 	}
 
 	@media (max-width: 480px) {
@@ -292,6 +400,16 @@ import MainLayout from '../layouts/MainLayout.astro';
 
 		.cta-button {
 			width: 100%;
+		}
+
+		.strengths-grid {
+			grid-template-columns: 1fr;
+		}
+		
+		.strength-icon {
+			width: 45px;
+			height: 45px;
+			font-size: 1.3rem;
 		}
 	}
 </style>
