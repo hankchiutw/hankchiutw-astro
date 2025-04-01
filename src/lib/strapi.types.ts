@@ -70,9 +70,9 @@ export interface StrapiExperience {
     position: string;
     company: string;
     startDate: string;
-    endDate?: string | null;
+    endDate?: string;
     current?: boolean;
-    description: string;
+    description: string | string[];
   };
 }
 

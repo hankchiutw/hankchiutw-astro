@@ -11,7 +11,7 @@ const fallbackAbout: StrapiAbout = {
 	id: 1,
 	attributes: {
 		title: "Professional Experience",
-		introduction: "A dedicated software engineer specializing in web front-end development, with valuable experience in back-end technologies. Committed to delivering high-quality solutions that align with business goals and enhance user experiences.",
+		introduction: "I specialize in helping companies transform their web presence by building scalable and maintainable applications and modernizing existing legacy codebases. My background in startups has given me a passion for the challenge of developing products in dynamic, high-growth environments.",
 		skills: {
 			data: [
 				{ id: 1, attributes: { name: "TypeScript" } },
@@ -24,35 +24,64 @@ const fallbackAbout: StrapiAbout = {
 		},
 		experiences: {
 			data: [
-				{ 
-					id: 1, 
-					attributes: { 
+				{
+					id: 1,
+					attributes: {
 						position: "Senior Front-end Engineer",
 						company: "GoFreight",
 						startDate: "2021-10-01",
-						current: true,
-						description: "First dedicated web front-end engineer to reshape the legacy codebase. Enabled the transition of traditional multi-page architecture to modern SPA. Designed and implemented an internal library to bootstrap AngularJS and Angular within the same codebase, enhancing developer productivity and code maintainability."
-					} 
+						endDate: "2025-02-24",
+						description: [
+							"First dedicated web front-end engineer to reshape the legacy codebase",
+							"Enabled the transition of traditional multi-page architecture to modern SPA",
+							"Designed and implemented an internal library to bootstrap AngularJS and Angular within the same codebase",
+							"Enhanced developer productivity and code maintainability"
+						]
+					}
 				},
-				{ 
-					id: 2, 
-					attributes: { 
+				{
+					id: 2,
+					attributes: {
 						position: "Senior Front-end Engineer",
 						company: "aetherAI",
 						startDate: "2019-07-01",
 						endDate: "2021-10-01",
-						description: "Collaborated with machine learning engineers to deliver new features for an image-viewing web application. Scaffolded an internal new project using Feature-Sliced Design methodology. Reduced Sentry logs from 10k to 1k events daily. Identified and addressed key performance bottlenecks, reducing page loading time from 4s to 2s."
-					} 
+						description: [
+							"Collaborated with machine learning engineers to deliver new features for an image-viewing web application",
+							"Scaffolded an internal new project using Feature-Sliced Design methodology",
+							"Reduced Sentry logs from 10k to 1k events daily",
+							"Identified and addressed key performance bottlenecks, reducing page loading time from 4s to 2s"
+						]
+					}
 				},
-				{ 
-					id: 3, 
-					attributes: { 
+				{
+					id: 3,
+					attributes: {
 						position: "Senior Front-end Engineer",
 						company: "KaiOS Technology",
 						startDate: "2017-01-01",
 						endDate: "2019-06-01",
-						description: "Developed mobile applications using web technologies on low-end mobile devices with restricted hardware resources. Migrated legacy System app to a modern toolchain (webpack, ES6, etc.). Refactored the legacy Contact app from vanilla JavaScript to React."
-					} 
+						description: [
+							"Developed mobile applications using web technologies on low-end mobile devices with restricted hardware resources",
+							"Migrated legacy System app to a modern toolchain (webpack, ES6, etc.)",
+							"Refactored the legacy Contact app from vanilla JavaScript to React"
+						]
+					}
+				},
+				{
+					id: 4,
+					attributes: {
+						position: "Full-stack Engineer",
+						company: "YoWoo Technology",
+						startDate: "2015-03-01",
+						endDate: "2016-05-01",
+						description: [
+							"Designed and built RESTful APIs for web, Android, and iOS applications, ensuring seamless integration and functionality across platforms",
+							"Utilized MongoDB on AWS EC2 to enhance data management and scalability",
+							"Implemented a microservices architecture to improve system flexibility and maintainability",
+							"Developed frontend features using AngularJS, enhancing user experience and interactivity"
+						]
+					}
 				}
 			] as StrapiExperience[]
 		},
@@ -69,7 +98,7 @@ const about = aboutData || fallbackAbout;
 	<section class="experience-section">
 		<h1>{about.attributes.title}</h1>
 		<p class="introduction">{about.attributes.introduction}</p>
-		
+
 		<div class="section-container">
 			<h2 class="section-title">Skills & Expertise</h2>
 			<ul class="skills-list">
@@ -78,7 +107,7 @@ const about = aboutData || fallbackAbout;
 				))}
 			</ul>
 		</div>
-		
+
 		<div class="section-container">
 			<h2 class="section-title">Work History</h2>
 			<div class="experience-timeline">
@@ -88,12 +117,19 @@ const about = aboutData || fallbackAbout;
 							<h3 class="company-title"><i class="fas fa-building"></i> {exp.attributes.position} at {exp.attributes.company}</h3>
 							{exp.attributes.startDate && (
 								<p class="experience-duration">
-									<i class="far fa-calendar-alt"></i> {new Date(exp.attributes.startDate).toLocaleDateString('en-US', {year: 'numeric', month: 'long'})} - 
+									<i class="far fa-calendar-alt"></i> {new Date(exp.attributes.startDate).toLocaleDateString('en-US', {year: 'numeric', month: 'long'})} -
 									{exp.attributes.current ? 'Present' : exp.attributes.endDate && new Date(exp.attributes.endDate).toLocaleDateString('en-US', {year: 'numeric', month: 'long'})}
 								</p>
 							)}
 						</div>
-						<p class="experience-description">{exp.attributes.description}</p>
+						<ul class="experience-description">
+							{Array.isArray(exp.attributes.description) ?
+								exp.attributes.description.map((item: string) => (
+									<li>{item}</li>
+								)) :
+								<li>{exp.attributes.description}</li>
+							}
+						</ul>
 					</div>
 				))}
 			</div>
@@ -194,7 +230,7 @@ const about = aboutData || fallbackAbout;
 		padding-left: 2rem;
 		border-bottom: 1px solid var(--border-color);
 	}
-	
+
 	.experience-item:last-child {
 		border-bottom: none;
 		margin-bottom: 0;
@@ -217,7 +253,7 @@ const about = aboutData || fallbackAbout;
 		color: white;
 		font-size: 0.7rem;
 	}
-	
+
 	.experience-header {
 		margin-bottom: 1rem;
 	}
@@ -236,7 +272,7 @@ const about = aboutData || fallbackAbout;
 	.company-title i {
 		margin-top: 0.25rem;
 	}
-	
+
 	.experience-duration {
 		font-style: italic;
 		color: var(--text-color-light);
@@ -248,7 +284,30 @@ const about = aboutData || fallbackAbout;
 	}
 
 	.experience-description {
+		color: var(--text-color);
+		line-height: 1.8;
+		font-size: 1.1rem;
+		margin: 1rem 0;
+		padding: 0 1rem;
+		max-width: 800px;
+		margin-left: auto;
+		margin-right: auto;
+		list-style: none;
+	}
+
+	.experience-description li {
+		position: relative;
+		margin-bottom: 0.8rem;
 		line-height: 1.6;
+		padding-left: 1.5rem;
+	}
+
+	.experience-description li::before {
+		content: "•";
+		color: var(--primary-color);
+		font-weight: bold;
+		position: absolute;
+		left: 0;
 	}
 
 	@media (max-width: 768px) {
@@ -270,6 +329,16 @@ const about = aboutData || fallbackAbout;
 
 		.company-title {
 			flex-wrap: wrap;
+		}
+
+		.experience-description {
+			font-size: 1rem;
+			line-height: 1.7;
+			padding: 0 0.5rem;
+		}
+
+		.experience-description li {
+			padding-left: 1.2rem;
 		}
 	}
 
@@ -302,5 +371,11 @@ const about = aboutData || fallbackAbout;
 		.experience-duration {
 			flex-wrap: wrap;
 		}
+
+		.experience-description {
+			font-size: 0.95rem;
+			line-height: 1.6;
+			padding: 0;
+		}
 	}
-</style> 
+</style>
