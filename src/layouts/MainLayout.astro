@@ -25,31 +25,40 @@ const { title = "Hank Chiu - Web Front-End Expert" } = Astro.props;
 	</head>
 	<body>
 		<header>
-			<nav>
-				<a href="/">Home</a>
-				<a href="/experiences">Experiences</a>
-				<a href="/projects">Projects</a>
-			</nav>
-			<button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode">
-				<i class="fas fa-sun theme-toggle-light"></i>
-				<i class="fas fa-moon theme-toggle-dark" style="display: none;"></i>
-			</button>
+			<div class="header-content">
+				<nav>
+					<a href="/">Home</a>
+					<a href="/experiences">Experiences</a>
+					<a href="/projects">Projects</a>
+				</nav>
+				<div class="header-right">
+					<div class="social-icons">
+						<a href="https://github.com/" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+							<i class="fab fa-github"></i>
+						</a>
+						<a href="https://linkedin.com/in/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+							<i class="fab fa-linkedin"></i>
+						</a>
+					</div>
+					<button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode">
+						<i class="fas fa-sun theme-toggle-light"></i>
+						<i class="fas fa-moon theme-toggle-dark" style="display: none;"></i>
+					</button>
+				</div>
+			</div>
 		</header>
 		<main>
 			<slot />
 		</main>
 		<footer>
 			<div class="footer-content">
-				<p>© 2023 - Hank Chiu</p>
+				<p>© {new Date().getFullYear()} - Hank Chiu</p>
 				<div class="social-icons">
 					<a href="https://github.com/" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
 						<i class="fab fa-github"></i>
 					</a>
 					<a href="https://linkedin.com/in/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
 						<i class="fab fa-linkedin"></i>
-					</a>
-					<a href="https://twitter.com/" target="_blank" rel="noopener noreferrer" aria-label="Twitter">
-						<i class="fab fa-twitter"></i>
 					</a>
 				</div>
 			</div>
