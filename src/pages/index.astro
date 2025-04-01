@@ -193,16 +193,16 @@ import MainLayout from '../layouts/MainLayout.astro';
 	}
 
 	/* Make sure dark theme has proper contrast for the secondary button */
-	:global(.dark-theme) .cta-button.secondary {
+	:global(html.dark-theme) .cta-button.secondary {
 		border-color: var(--primary-color);
 		color: var(--primary-color);
 	}
 
-	:global(.dark-theme) .cta-button {
+	:global(html.dark-theme) .cta-button {
 		box-shadow: 0 2px 8px rgba(0,0,0,0.4);
 	}
 
-	:global(.dark-theme) .cta-button:hover {
+	:global(html.dark-theme) .cta-button:hover {
 		box-shadow: 0 4px 12px rgba(0,0,0,0.6);
 	}
 

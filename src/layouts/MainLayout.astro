@@ -1,6 +1,5 @@
 ---
 // MainLayout.astro
-import { ViewTransitions } from 'astro:transitions';
 const { title = "Hank Chiu - Web Front-End Expert" } = Astro.props;
 ---
 
@@ -11,7 +10,16 @@ const { title = "Hank Chiu - Web Front-End Expert" } = Astro.props;
 		<meta name="viewport" content="width=device-width" />
 		<meta name="generator" content={Astro.generator} />
 		<title>{title}</title>
-		<ViewTransitions />
+		<!-- Inline script to set theme before page renders to prevent flickering -->
+		<script is:inline>
+			// Check for saved theme preference or use system preference
+			const savedTheme = localStorage.getItem('theme');
+			// Apply dark theme if saved or if system prefers dark and no setting saved
+			const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+			if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
+				document.documentElement.classList.add('dark-theme');
+			}
+		</script>
 	</head>
 	<body>
 		<header>
@@ -25,7 +33,7 @@ const { title = "Hank Chiu - Web Front-End Expert" } = Astro.props;
 				<span class="theme-toggle-dark" style="display: none;">🌙</span>
 			</button>
 		</header>
-		<main transition:animate="fade">
+		<main>
 			<slot />
 		</main>
 		<footer>
@@ -39,21 +47,17 @@ const { title = "Hank Chiu - Web Front-End Expert" } = Astro.props;
 	const themeToggle = document.getElementById('theme-toggle');
 	const lightIcon = document.querySelector('.theme-toggle-light') as HTMLElement;
 	const darkIcon = document.querySelector('.theme-toggle-dark') as HTMLElement;
-	const htmlElement = document.documentElement;
 	
-	// Check if user previously set a preference
-	const savedTheme = localStorage.getItem('theme');
-	if (savedTheme === 'dark' && lightIcon && darkIcon) {
-		document.body.classList.add('dark-theme');
-		htmlElement.classList.add('dark-theme');
+	// Check if dark mode is currently active and update the toggle button
+	const isDarkTheme = document.documentElement.classList.contains('dark-theme');
+	if (isDarkTheme && lightIcon && darkIcon) {
 		lightIcon.style.display = 'none';
 		darkIcon.style.display = 'inline';
 	}
 	
 	// Toggle theme when button is clicked
 	themeToggle?.addEventListener('click', () => {
-		const isDarkTheme = document.body.classList.toggle('dark-theme');
-		htmlElement.classList.toggle('dark-theme');
+		const isDarkTheme = document.documentElement.classList.toggle('dark-theme');
 		
 		if (isDarkTheme && lightIcon && darkIcon) {
 			localStorage.setItem('theme', 'dark');
@@ -63,30 +67,6 @@ const { title = "Hank Chiu - Web Front-End Expert" } = Astro.props;
 			localStorage.setItem('theme', 'light');
 			lightIcon.style.display = 'inline';
 			darkIcon.style.display = 'none';
-		}
-	});
-	
-	// Also check for system preference if no saved preference
-	if (!savedTheme && lightIcon && darkIcon) {
-		const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-		if (prefersDark) {
-			document.body.classList.add('dark-theme');
-			htmlElement.classList.add('dark-theme');
-			lightIcon.style.display = 'none';
-			darkIcon.style.display = 'inline';
-		}
-	}
-
-	// Improve page transitions
-	document.addEventListener('astro:before-swap', (event) => {
-		// Pass the current theme to the next page
-		const currentTheme = localStorage.getItem('theme') || 
-			(window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
-		
-		// Use the Astro view transition API to preserve theme state
-		if (currentTheme === 'dark') {
-			(event.newDocument as Document).documentElement.classList.add('dark-theme');
-			(event.newDocument as Document).body.classList.add('dark-theme');
 		}
 	});
 </script>
