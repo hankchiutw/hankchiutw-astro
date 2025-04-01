@@ -2,12 +2,144 @@
 import MainLayout from '../layouts/MainLayout.astro';
 ---
 
-<MainLayout title="My Personal Site">
-	<h1>Welcome to My Site</h1>
-	<p>This is my personal website built with Astro.</p>
+<MainLayout title="Hank Chiu | Web Front-End Expert">
+	<div class="hero-section">
+		<h1>Hank Chiu</h1>
+		<h2>Web Front-End Expert</h2>
+		<p class="location">Taoyuan, Taiwan</p>
+		
+		<div class="contact-info">
+			<a href="mailto:hankchiu.tw@gmail.com" class="contact-link">
+				<span class="icon">✉️</span> hankchiu.tw@gmail.com
+			</a>
+			<a href="tel:+886978031073" class="contact-link">
+				<span class="icon">📱</span> +886-978-031073
+			</a>
+		</div>
+		
+		<p class="intro">
+			A dedicated software engineer specializing in web front-end development, with valuable experience in back-end technologies. 
+			Committed to delivering high-quality solutions that align with business goals and enhance user experiences.
+		</p>
+		
+		<div class="cta-buttons">
+			<a href="/about" class="cta-button">View My Experience</a>
+			<a href="/projects" class="cta-button">Explore My Projects</a>
+		</div>
+	</div>
 	
-	<div class="cta-buttons">
-		<a href="/about" class="cta-button">Learn About Me</a>
-		<a href="/projects" class="cta-button">View My Projects</a>
+	<div class="strengths-section">
+		<h2>Strengths & Expertise</h2>
+		<ul class="strengths-list">
+			<li>Strong architectural thinking, ensuring scalable and maintainable solutions</li>
+			<li>Advocacy for clean code principles, promoting readability and maintainability</li>
+			<li>Proficient in code refactoring techniques to improve code quality and performance</li>
+			<li>Experienced in mentoring and guiding fellow engineers to foster growth and collaboration</li>
+		</ul>
 	</div>
 </MainLayout>
+
+<style>
+	.hero-section {
+		text-align: center;
+		padding: 3rem 0;
+		max-width: 800px;
+		margin: 0 auto;
+	}
+	
+	h1 {
+		font-size: 3rem;
+		margin-bottom: 0.5rem;
+	}
+	
+	h2 {
+		font-size: 1.5rem;
+		color: var(--primary-color);
+		margin-top: 0;
+		margin-bottom: 1rem;
+	}
+	
+	.location {
+		font-style: italic;
+		margin-bottom: 1.5rem;
+	}
+	
+	.contact-info {
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: center;
+		gap: 1.5rem;
+		margin-bottom: 2rem;
+	}
+	
+	.contact-link {
+		display: flex;
+		align-items: center;
+		gap: 0.5rem;
+		text-decoration: none;
+		color: var(--text-color);
+		font-weight: 500;
+		transition: color 0.2s ease;
+	}
+	
+	.contact-link:hover {
+		color: var(--primary-color);
+	}
+	
+	.icon {
+		font-size: 1.2rem;
+	}
+	
+	.intro {
+		font-size: 1.2rem;
+		line-height: 1.6;
+		margin-bottom: 2rem;
+		max-width: 800px;
+	}
+	
+	.strengths-section {
+		background-color: var(--accent-bg);
+		padding: 3rem 2rem;
+		border-radius: 8px;
+		margin: 2rem auto;
+		max-width: 800px;
+	}
+	
+	.strengths-section h2 {
+		text-align: center;
+		margin-bottom: 2rem;
+	}
+	
+	.strengths-list {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+		gap: 1.5rem;
+		padding: 0;
+		list-style-position: inside;
+	}
+	
+	.strengths-list li {
+		margin-bottom: 1rem;
+		line-height: 1.5;
+	}
+	
+	@media (max-width: 768px) {
+		.hero-section {
+			padding: 2rem 1rem;
+		}
+		
+		.strengths-section {
+			padding: 2rem 1rem;
+		}
+		
+		.contact-info {
+			flex-direction: column;
+			align-items: center;
+			gap: 1rem;
+		}
+		
+		.strengths-list {
+			grid-template-columns: 1fr;
+		}
+	}
+</style>
