@@ -66,37 +66,74 @@ const about = aboutData || fallbackAbout;
 ---
 
 <MainLayout title="Professional Experience">
-	<h1>{about.attributes.title}</h1>
-	<p class="introduction">{about.attributes.introduction}</p>
-	
-	<h2>Skills & Expertise</h2>
-	<ul class="skills-list">
-		{about.attributes.skills.data.map((skill: StrapiSkill) => (
-			<li><span class="skill-tag">{skill.attributes.name}</span></li>
-		))}
-	</ul>
-	
-	<h2>Work History</h2>
-	{about.attributes.experiences.data.map((exp: StrapiExperience) => (
-		<div class="experience-item">
-			<h3>{exp.attributes.position} at {exp.attributes.company}</h3>
-			{exp.attributes.startDate && (
-				<p class="experience-duration">
-					{new Date(exp.attributes.startDate).toLocaleDateString('en-US', {year: 'numeric', month: 'long'})} - 
-					{exp.attributes.current ? 'Present' : exp.attributes.endDate && new Date(exp.attributes.endDate).toLocaleDateString('en-US', {year: 'numeric', month: 'long'})}
-				</p>
-			)}
-			<p>{exp.attributes.description}</p>
+	<section class="experience-section">
+		<h1>{about.attributes.title}</h1>
+		<p class="introduction">{about.attributes.introduction}</p>
+		
+		<div class="section-container">
+			<h2 class="section-title">Skills & Expertise</h2>
+			<ul class="skills-list">
+				{about.attributes.skills.data.map((skill: StrapiSkill) => (
+					<li><span class="skill-tag">{skill.attributes.name}</span></li>
+				))}
+			</ul>
 		</div>
-	))}
+		
+		<div class="section-container">
+			<h2 class="section-title">Work History</h2>
+			<div class="experience-timeline">
+				{about.attributes.experiences.data.map((exp: StrapiExperience) => (
+					<div class="experience-item">
+						<div class="experience-header">
+							<h3 class="company-title">{exp.attributes.position} at {exp.attributes.company}</h3>
+							{exp.attributes.startDate && (
+								<p class="experience-duration">
+									{new Date(exp.attributes.startDate).toLocaleDateString('en-US', {year: 'numeric', month: 'long'})} - 
+									{exp.attributes.current ? 'Present' : exp.attributes.endDate && new Date(exp.attributes.endDate).toLocaleDateString('en-US', {year: 'numeric', month: 'long'})}
+								</p>
+							)}
+						</div>
+						<p class="experience-description">{exp.attributes.description}</p>
+					</div>
+				))}
+			</div>
+		</div>
+	</section>
 </MainLayout>
 
 <style>
+	.experience-section {
+		padding: 2rem 0;
+	}
+
+	.section-container {
+		margin-bottom: 3rem;
+	}
+
+	.section-title {
+		position: relative;
+		padding-bottom: 0.5rem;
+		margin-bottom: 1.5rem;
+		font-size: 1.75rem;
+		color: var(--primary-color);
+	}
+
+	.section-title::after {
+		content: '';
+		position: absolute;
+		bottom: 0;
+		left: 0;
+		width: 60px;
+		height: 3px;
+		background-color: var(--primary-color);
+	}
+
 	.introduction {
 		font-size: 1.1rem;
 		line-height: 1.6;
 		max-width: 800px;
-		margin-bottom: 2rem;
+		margin-bottom: 2.5rem;
+		color: var(--text-color-light);
 	}
 
 	.skills-list {
@@ -105,32 +142,92 @@ const about = aboutData || fallbackAbout;
 		gap: 0.75rem;
 		list-style: none;
 		padding: 0;
-		margin-bottom: 2.5rem;
 	}
 
 	.skill-tag {
 		background-color: var(--accent-bg);
 		color: var(--primary-color);
-		padding: 0.4rem 0.8rem;
-		border-radius: 4px;
+		padding: 0.5rem 1rem;
+		border-radius: var(--radius-sm);
 		font-size: 0.9rem;
 		font-weight: 500;
+		transition: background-color 0.3s ease, transform 0.2s ease;
+	}
+
+	.skill-tag:hover {
+		background-color: var(--accent-hover);
+		transform: translateY(-2px);
+	}
+
+	.experience-timeline {
+		position: relative;
+	}
+
+	.experience-timeline::before {
+		content: '';
+		position: absolute;
+		top: 0;
+		bottom: 0;
+		left: 0;
+		width: 2px;
+		background-color: var(--border-color);
 	}
 
 	.experience-item {
+		position: relative;
 		margin-bottom: 2.5rem;
 		padding-bottom: 2rem;
+		padding-left: 2rem;
 		border-bottom: 1px solid var(--border-color);
 	}
 	
 	.experience-item:last-child {
 		border-bottom: none;
 	}
+
+	.experience-item::before {
+		content: '';
+		position: absolute;
+		top: 0.5rem;
+		left: -5px;
+		width: 12px;
+		height: 12px;
+		border-radius: 50%;
+		background-color: var(--primary-color);
+	}
+	
+	.experience-header {
+		margin-bottom: 1rem;
+	}
+
+	.company-title {
+		margin-top: 0;
+		margin-bottom: 0.5rem;
+		color: var(--text-color);
+		font-size: 1.3rem;
+	}
 	
 	.experience-duration {
 		font-style: italic;
 		color: var(--text-color-light);
-		margin-top: -0.5rem;
-		margin-bottom: 0.75rem;
+		margin: 0;
+	}
+
+	.experience-description {
+		line-height: 1.6;
+	}
+
+	@media (max-width: 768px) {
+		.experience-timeline::before {
+			left: -1rem;
+		}
+
+		.experience-item {
+			padding-left: 1rem;
+		}
+
+		.experience-item::before {
+			left: -1.3rem;
+		}
 	}
 </style> 
