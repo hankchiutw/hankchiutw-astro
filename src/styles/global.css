@@ -1,0 +1,119 @@
+/* Global styles for the entire site */
+
+/* Base styles */
+:root {
+  --primary-color: #0077cc;
+  --primary-color-dark: #005fa3;
+  --text-color: #333;
+  --text-color-light: #666;
+  --bg-color: #ffffff;
+  --border-color: #eaeaea;
+  --accent-bg: #f0f0f0;
+  --font-family: system-ui, sans-serif;
+}
+
+body {
+  font-family: var(--font-family);
+  color: var(--text-color);
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1rem;
+  line-height: 1.6;
+}
+
+/* Layout */
+header {
+  margin-bottom: 2rem;
+}
+
+main {
+  margin-bottom: 2rem;
+}
+
+footer {
+  margin-top: 4rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border-color);
+  color: var(--text-color-light);
+}
+
+/* Navigation */
+nav {
+  display: flex;
+  gap: 1rem;
+}
+
+nav a {
+  text-decoration: none;
+  color: var(--text-color);
+  font-weight: 500;
+  padding: 0.5rem;
+  transition: color 0.2s ease;
+}
+
+nav a:hover {
+  color: var(--primary-color);
+}
+
+/* Call to action buttons */
+.cta-buttons {
+  display: flex;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.cta-button {
+  display: inline-block;
+  background-color: var(--primary-color);
+  color: white;
+  padding: 0.75rem 1.5rem;
+  border-radius: 4px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: background-color 0.2s ease;
+}
+
+.cta-button:hover {
+  background-color: var(--primary-color-dark);
+}
+
+/* Project cards */
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.project-card {
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  padding: 1.5rem;
+  transition: transform 0.2s ease;
+}
+
+.project-card:hover {
+  transform: translateY(-5px);
+}
+
+.tech-stack {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 1rem 0;
+}
+
+.tech-stack span {
+  background-color: var(--accent-bg);
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  font-size: 0.8rem;
+}
+
+.project-link {
+  display: inline-block;
+  margin-top: 1rem;
+  text-decoration: none;
+  color: var(--primary-color);
+  font-weight: bold;
+} 

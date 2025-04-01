@@ -1,40 +1,19 @@
 ---
-
+import MainLayout from '../layouts/MainLayout.astro';
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>About Me</title>
-	</head>
-	<body>
-		<header>
-			<nav>
-				<a href="/">Home</a>
-				<a href="/about">About</a>
-				<a href="/projects">Projects</a>
-			</nav>
-		</header>
-		<main>
-			<h1>About Me</h1>
-			<p>Hello! I'm a developer passionate about building amazing web experiences.</p>
-			
-			<h2>Skills</h2>
-			<ul>
-				<li>Web Development</li>
-				<li>JavaScript/TypeScript</li>
-				<li>React</li>
-				<li>Astro</li>
-			</ul>
-			
-			<h2>Experience</h2>
-			<p>I have experience building modern, performant websites using the latest web technologies.</p>
-		</main>
-		<footer>
-			<p>© 2023 - My Personal Website</p>
-		</footer>
-	</body>
-</html> 
+<MainLayout title="About Me">
+	<h1>About Me</h1>
+	<p>Hello! I'm a developer passionate about building amazing web experiences.</p>
+	
+	<h2>Skills</h2>
+	<ul>
+		<li>Web Development</li>
+		<li>JavaScript/TypeScript</li>
+		<li>React</li>
+		<li>Astro</li>
+	</ul>
+	
+	<h2>Experience</h2>
+	<p>I have experience building modern, performant websites using the latest web technologies.</p>
+</MainLayout> 
