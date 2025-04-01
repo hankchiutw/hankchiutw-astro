@@ -20,17 +20,17 @@ import MainLayout from '../layouts/MainLayout.astro';
 		</div>
 		<ul class="contact-list">
 			<li class="contact-item">
-				<span class="contact-icon">📍</span>
+				<span class="contact-icon"><i class="fas fa-map-marker-alt"></i></span>
 				<span class="contact-label">Location:</span>
 				<span class="contact-value">Taoyuan, Taiwan</span>
 			</li>
 			<li class="contact-item">
-				<span class="contact-icon">📱</span>
+				<span class="contact-icon"><i class="fas fa-phone-alt"></i></span>
 				<span class="contact-label">Phone:</span>
 				<span class="contact-value">+886-978-031073</span>
 			</li>
 			<li class="contact-item">
-				<span class="contact-icon">📧</span>
+				<span class="contact-icon"><i class="fas fa-envelope"></i></span>
 				<span class="contact-label">Email:</span>
 				<span class="contact-value">
 					<a href="mailto:hankchiu.tw@gmail.com">hankchiu.tw@gmail.com</a>
@@ -40,8 +40,8 @@ import MainLayout from '../layouts/MainLayout.astro';
 	</section>
 	
 	<section class="cta-section">
-		<a href="/experiences" class="cta-button">View My Experiences</a>
-		<a href="/projects" class="cta-button secondary">View My Projects</a>
+		<a href="/experiences" class="cta-button"><i class="fas fa-briefcase"></i> View My Experiences</a>
+		<a href="/projects" class="cta-button secondary"><i class="fas fa-code-branch"></i> View My Projects</a>
 	</section>
 </MainLayout>
 
@@ -129,6 +129,20 @@ import MainLayout from '../layouts/MainLayout.astro';
 	.contact-icon {
 		margin-right: 0.75rem;
 		font-size: 1.2rem;
+		width: 28px;
+		height: 28px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		color: var(--primary-color);
+		background: var(--accent-hover);
+		border-radius: 50%;
+	}
+
+	.contact-icon i {
+		display: flex;
+		align-items: center;
+		justify-content: center;
 	}
 
 	.contact-label {
