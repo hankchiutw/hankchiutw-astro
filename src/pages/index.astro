@@ -65,7 +65,7 @@ import MainLayout from '../layouts/MainLayout.astro';
 	}
 
 	.profile-name {
-		font-size: 3rem;
+		font-size: clamp(2.2rem, 8vw, 3rem);
 		font-weight: 700;
 		margin-bottom: 0.5rem;
 		background: linear-gradient(90deg, var(--primary-color) 0%, var(--primary-color-dark) 100%);
@@ -75,7 +75,7 @@ import MainLayout from '../layouts/MainLayout.astro';
 	}
 
 	.profile-title {
-		font-size: 1.5rem;
+		font-size: clamp(1.2rem, 4vw, 1.5rem);
 		color: var(--text-color-light);
 		margin-top: 0;
 		margin-bottom: 1.5rem;
@@ -83,18 +83,22 @@ import MainLayout from '../layouts/MainLayout.astro';
 	}
 
 	.profile-intro {
-		font-size: 1.1rem;
+		font-size: clamp(1rem, 3vw, 1.1rem);
 		line-height: 1.6;
 		color: var(--text-color);
+		padding: 0 1rem;
 	}
 
 	/* Contact Section */
 	.contact-section {
 		margin-bottom: 3rem;
 		background-color: var(--accent-bg);
-		padding: 2rem;
+		padding: clamp(1rem, 4vw, 2rem);
 		border-radius: var(--radius-md);
 		box-shadow: 0 4px 10px var(--shadow-color);
+		max-width: 800px;
+		margin-left: auto;
+		margin-right: auto;
 	}
 
 	.section-header {
@@ -102,7 +106,7 @@ import MainLayout from '../layouts/MainLayout.astro';
 	}
 
 	.section-title {
-		font-size: 1.5rem;
+		font-size: clamp(1.2rem, 4vw, 1.5rem);
 		color: var(--primary-color);
 		margin-top: 0;
 		margin-bottom: 0.5rem;
@@ -124,6 +128,7 @@ import MainLayout from '../layouts/MainLayout.astro';
 		margin-bottom: 1rem;
 		display: flex;
 		align-items: center;
+		flex-wrap: wrap;
 	}
 
 	.contact-icon {
@@ -137,6 +142,7 @@ import MainLayout from '../layouts/MainLayout.astro';
 		color: var(--primary-color);
 		background: rgba(var(--primary-color-rgb), 0.12);
 		border-radius: 50%;
+		flex-shrink: 0;
 	}
 
 	.contact-icon i {
@@ -149,10 +155,12 @@ import MainLayout from '../layouts/MainLayout.astro';
 		font-weight: 600;
 		width: 100px;
 		color: var(--text-color);
+		flex-shrink: 0;
 	}
 
 	.contact-value {
 		color: var(--text-color);
+		word-break: break-word;
 	}
 
 	.contact-value a {
@@ -176,7 +184,10 @@ import MainLayout from '../layouts/MainLayout.astro';
 	}
 
 	.cta-button {
-		display: inline-block;
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		gap: 0.5rem;
 		background-color: var(--primary-color);
 		color: white;
 		padding: 0.8rem 1.5rem;
@@ -185,7 +196,8 @@ import MainLayout from '../layouts/MainLayout.astro';
 		font-weight: 500;
 		transition: all 0.3s ease;
 		text-align: center;
-		min-width: 200px;
+		width: 100%;
+		max-width: 220px;
 		border: 2px solid var(--primary-color);
 		box-shadow: 0 2px 5px var(--shadow-color);
 	}
@@ -220,17 +232,64 @@ import MainLayout from '../layouts/MainLayout.astro';
 		box-shadow: 0 4px 12px rgba(0,0,0,0.6);
 	}
 
-	/* Responsive */
+	/* Responsive adjustments */
 	@media (max-width: 768px) {
-		.profile-name {
-			font-size: 2.5rem;
+		.hero-section {
+			padding: 1.5rem 0;
+			margin-bottom: 2rem;
 		}
-		
+
+		.profile-intro {
+			padding: 0 0.5rem;
+		}
+
+		.contact-section {
+			padding: 1.5rem;
+			margin-bottom: 2rem;
+		}
+
+		.contact-item {
+			margin-bottom: 1.2rem;
+		}
+
+		.contact-label {
+			margin-bottom: 0.2rem;
+		}
+
+		.cta-button {
+			max-width: 100%;
+		}
+	}
+
+	@media (max-width: 480px) {
+		.hero-section {
+			padding: 1rem 0;
+		}
+
+		.contact-section {
+			padding: 1rem;
+		}
+
+		.contact-item {
+			flex-direction: column;
+			align-items: flex-start;
+			margin-bottom: 1.5rem;
+		}
+
+		.contact-icon {
+			margin-bottom: 0.5rem;
+		}
+
+		.contact-label {
+			width: auto;
+			margin-bottom: 0.3rem;
+		}
+
 		.cta-section {
 			flex-direction: column;
 			align-items: center;
 		}
-		
+
 		.cta-button {
 			width: 100%;
 		}
