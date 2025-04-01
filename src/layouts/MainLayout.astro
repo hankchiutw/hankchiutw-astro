@@ -1,6 +1,7 @@
 ---
 // MainLayout.astro
 const { title = "Hank Chiu - Web Front-End Expert" } = Astro.props;
+const path = Astro.url.pathname;
 ---
 
 <html lang="en">
@@ -27,9 +28,15 @@ const { title = "Hank Chiu - Web Front-End Expert" } = Astro.props;
 		<header>
 			<div class="header-content">
 				<nav>
-					<a href="/">Home</a>
-					<a href="/experiences">Experiences</a>
-					<a href="/projects">Projects</a>
+					<a href="/" class={path === "/" ? "active" : ""}>
+						<i class="fas fa-home"></i><span class="nav-text">Home</span>
+					</a>
+					<a href="/experiences" class={path === "/experiences" ? "active" : ""}>
+						<i class="fas fa-briefcase"></i><span class="nav-text">Experiences</span>
+					</a>
+					<a href="/projects" class={path === "/projects" ? "active" : ""}>
+						<i class="fas fa-code-branch"></i><span class="nav-text">Projects</span>
+					</a>
 				</nav>
 				<div class="header-right">
 					<div class="social-icons">
@@ -89,4 +96,15 @@ const { title = "Hank Chiu - Web Front-End Expert" } = Astro.props;
 
 <style is:global>
 	@import "../styles/global.css";
+
+	/* Additional mobile nav styles */
+	@media (max-width: 480px) {
+		.nav-text {
+			display: none;
+		}
+		
+		nav a i {
+			font-size: 1.1rem;
+		}
+	}
 </style> 
