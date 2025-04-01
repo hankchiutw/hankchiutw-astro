@@ -40,8 +40,8 @@ import MainLayout from '../layouts/MainLayout.astro';
 	</section>
 	
 	<section class="cta-section">
-		<a href="/experiences" class="cta-button"><i class="fas fa-briefcase"></i> View My Experiences</a>
-		<a href="/projects" class="cta-button secondary"><i class="fas fa-code-branch"></i> View My Projects</a>
+		<a href="/experiences" class="cta-button">View My Experiences</a>
+		<a href="/projects" class="cta-button secondary">View My Projects</a>
 	</section>
 </MainLayout>
 
@@ -111,7 +111,7 @@ import MainLayout from '../layouts/MainLayout.astro';
 	.section-divider {
 		height: 3px;
 		width: 60px;
-		background-color: var(--primary-color);
+		background-color: rgba(var(--primary-color-rgb), 0.6);
 		margin-bottom: 1.5rem;
 	}
 
@@ -129,13 +129,13 @@ import MainLayout from '../layouts/MainLayout.astro';
 	.contact-icon {
 		margin-right: 0.75rem;
 		font-size: 1.2rem;
-		width: 28px;
-		height: 28px;
+		width: 32px;
+		height: 32px;
 		display: flex;
 		align-items: center;
 		justify-content: center;
 		color: var(--primary-color);
-		background: var(--accent-hover);
+		background: rgba(var(--primary-color-rgb), 0.12);
 		border-radius: 50%;
 	}
 

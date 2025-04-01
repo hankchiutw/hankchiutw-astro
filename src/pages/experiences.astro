@@ -67,11 +67,11 @@ const about = aboutData || fallbackAbout;
 
 <MainLayout title="Professional Experience">
 	<section class="experience-section">
-		<h1><i class="fas fa-briefcase"></i> {about.attributes.title}</h1>
+		<h1>{about.attributes.title}</h1>
 		<p class="introduction">{about.attributes.introduction}</p>
 		
 		<div class="section-container">
-			<h2 class="section-title"><i class="fas fa-laptop-code"></i> Skills & Expertise</h2>
+			<h2 class="section-title">Skills & Expertise</h2>
 			<ul class="skills-list">
 				{about.attributes.skills.data.map((skill: StrapiSkill) => (
 					<li><span class="skill-tag"><i class="fas fa-check-circle"></i> {skill.attributes.name}</span></li>
@@ -80,7 +80,7 @@ const about = aboutData || fallbackAbout;
 		</div>
 		
 		<div class="section-container">
-			<h2 class="section-title"><i class="fas fa-history"></i> Work History</h2>
+			<h2 class="section-title">Work History</h2>
 			<div class="experience-timeline">
 				{about.attributes.experiences.data.map((exp: StrapiExperience) => (
 					<div class="experience-item">
@@ -128,7 +128,7 @@ const about = aboutData || fallbackAbout;
 		left: 0;
 		width: 60px;
 		height: 3px;
-		background-color: var(--primary-color);
+		background-color: rgba(var(--primary-color-rgb), 0.6);
 	}
 
 	.introduction {
@@ -148,8 +148,8 @@ const about = aboutData || fallbackAbout;
 	}
 
 	.skill-tag {
-		background-color: var(--accent-bg);
-		color: var(--primary-color);
+		background-color: rgba(var(--primary-color-rgb), 0.1);
+		color: var(--text-color);
 		padding: 0.5rem 1rem;
 		border-radius: var(--radius-sm);
 		font-size: 0.9rem;
@@ -209,7 +209,7 @@ const about = aboutData || fallbackAbout;
 		align-items: center;
 		justify-content: center;
 		border-radius: 50%;
-		background-color: var(--primary-color);
+		background-color: rgba(var(--primary-color-rgb), 0.85);
 		color: white;
 		font-size: 0.7rem;
 	}

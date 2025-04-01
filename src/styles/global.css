@@ -3,9 +3,9 @@
 /* Base styles */
 :root {
   /* Light theme (default) */
-  --primary-color: #0077cc;
-  --primary-color-rgb: 0, 119, 204;
-  --primary-color-dark: #005fa3;
+  --primary-color: #5c95d1;
+  --primary-color-rgb: 92, 149, 209;
+  --primary-color-dark: #4678b2;
   --text-color: #333;
   --text-color-light: #666;
   --bg-color: #ffffff;
@@ -33,9 +33,9 @@
 
 /* Apply dark theme variables to html element instead of body for better page transitions */
 html.dark-theme {
-  --primary-color: #4da8ff;
-  --primary-color-rgb: 77, 168, 255;
-  --primary-color-dark: #3a7ebf;
+  --primary-color: #7eaddd;
+  --primary-color-rgb: 126, 173, 221;
+  --primary-color-dark: #6393c5;
   --text-color: #e0e0e0;
   --text-color-light: #a0a0a0;
   --bg-color: #121212;
