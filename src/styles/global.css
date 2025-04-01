@@ -4,6 +4,7 @@
 :root {
   /* Light theme (default) */
   --primary-color: #0077cc;
+  --primary-color-rgb: 0, 119, 204;
   --primary-color-dark: #005fa3;
   --text-color: #333;
   --text-color-light: #666;
@@ -33,9 +34,10 @@
 /* Dark theme */
 .dark-theme {
   --primary-color: #4da8ff;
+  --primary-color-rgb: 77, 168, 255;
   --primary-color-dark: #3a7ebf;
   --text-color: #e0e0e0;
-  --text-color-light: #b0b0b0;
+  --text-color-light: #a0a0a0;
   --bg-color: #121212;
   --border-color: #383838;
   --accent-bg: #2a2a2a;
