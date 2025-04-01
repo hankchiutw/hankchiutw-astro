@@ -1,7 +1,6 @@
 ---
 // MainLayout.astro
 const { title = "Hank Chiu - Web Front-End Expert" } = Astro.props;
-const path = Astro.url.pathname;
 ---
 
 <html lang="en">
@@ -27,17 +26,19 @@ const path = Astro.url.pathname;
 	<body>
 		<header>
 			<div class="header-content">
-				<nav>
-					<a href="/" class={path === "/" ? "active" : ""}>
-						<i class="fas fa-home"></i><span class="nav-text">Home</span>
-					</a>
-					<a href="/experiences" class={path === "/experiences" ? "active" : ""}>
-						<i class="fas fa-briefcase"></i><span class="nav-text">Experiences</span>
-					</a>
-					<a href="/projects" class={path === "/projects" ? "active" : ""}>
-						<i class="fas fa-code-branch"></i><span class="nav-text">Projects</span>
-					</a>
+				<div class="logo-menu">
+					<a href="/" class="logo">Hank Chiu</a>
+					<button id="menu-toggle" class="menu-toggle" aria-label="Toggle menu">
+						<i class="fas fa-bars"></i>
+					</button>
+				</div>
+				
+				<nav id="main-nav">
+					<a href="/">Home</a>
+					<a href="/experiences">Experiences</a>
+					<a href="/projects">Projects</a>
 				</nav>
+				
 				<div class="header-right">
 					<div class="social-icons">
 						<a href="https://github.com/" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
@@ -92,19 +93,44 @@ const path = Astro.url.pathname;
 			darkIcon.style.display = 'none';
 		}
 	});
+
+	// Mobile menu toggle
+	const menuToggle = document.getElementById('menu-toggle');
+	const mainNav = document.getElementById('main-nav');
+
+	menuToggle?.addEventListener('click', () => {
+		mainNav?.classList.toggle('show');
+		
+		// Change icon based on menu state
+		const icon = menuToggle.querySelector('i');
+		if (icon) {
+			if (mainNav?.classList.contains('show')) {
+				icon.classList.remove('fa-bars');
+				icon.classList.add('fa-times');
+			} else {
+				icon.classList.remove('fa-times');
+				icon.classList.add('fa-bars');
+			}
+		}
+	});
+
+	// Close menu when clicking outside
+	document.addEventListener('click', (event) => {
+		const target = event.target as Node;
+		if (mainNav?.classList.contains('show') && 
+			!mainNav.contains(target) && 
+			menuToggle !== target && 
+			!menuToggle?.contains(target)) {
+			mainNav.classList.remove('show');
+			const icon = menuToggle?.querySelector('i');
+			if (icon) {
+				icon.classList.remove('fa-times');
+				icon.classList.add('fa-bars');
+			}
+		}
+	});
 </script>
 
 <style is:global>
 	@import "../styles/global.css";
-
-	/* Additional mobile nav styles */
-	@media (max-width: 480px) {
-		.nav-text {
-			display: none;
-		}
-		
-		nav a i {
-			font-size: 1.1rem;
-		}
-	}
 </style> 
