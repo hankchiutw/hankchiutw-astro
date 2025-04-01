@@ -1,0 +1,104 @@
+---
+
+---
+
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="viewport" content="width=device-width" />
+		<meta name="generator" content={Astro.generator} />
+		<title>My Projects</title>
+	</head>
+	<body>
+		<header>
+			<nav>
+				<a href="/">Home</a>
+				<a href="/about">About</a>
+				<a href="/projects">Projects</a>
+			</nav>
+		</header>
+		<main>
+			<h1>My Projects</h1>
+			<div class="projects-grid">
+				<div class="project-card">
+					<h2>Personal Blog</h2>
+					<p>A blog built with Astro featuring fast page loads and minimal JavaScript.</p>
+					<div class="tech-stack">
+						<span>Astro</span>
+						<span>JavaScript</span>
+						<span>CSS</span>
+					</div>
+					<a href="#" class="project-link">View Project</a>
+				</div>
+				
+				<div class="project-card">
+					<h2>Portfolio Website</h2>
+					<p>My personal portfolio showcasing my skills and projects.</p>
+					<div class="tech-stack">
+						<span>React</span>
+						<span>TypeScript</span>
+						<span>Tailwind CSS</span>
+					</div>
+					<a href="#" class="project-link">View Project</a>
+				</div>
+				
+				<div class="project-card">
+					<h2>E-commerce App</h2>
+					<p>A full-stack e-commerce application with user authentication and payment processing.</p>
+					<div class="tech-stack">
+						<span>Next.js</span>
+						<span>MongoDB</span>
+						<span>Stripe API</span>
+					</div>
+					<a href="#" class="project-link">View Project</a>
+				</div>
+			</div>
+		</main>
+		<footer>
+			<p>© 2023 - My Personal Website</p>
+		</footer>
+	</body>
+</html>
+
+<style>
+	.projects-grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+		gap: 2rem;
+		margin-top: 2rem;
+	}
+	
+	.project-card {
+		border: 1px solid #eaeaea;
+		border-radius: 8px;
+		padding: 1.5rem;
+		transition: transform 0.2s ease;
+	}
+	
+	.project-card:hover {
+		transform: translateY(-5px);
+	}
+	
+	.tech-stack {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.5rem;
+		margin: 1rem 0;
+	}
+	
+	.tech-stack span {
+		background-color: #f0f0f0;
+		padding: 0.25rem 0.5rem;
+		border-radius: 4px;
+		font-size: 0.8rem;
+	}
+	
+	.project-link {
+		display: inline-block;
+		margin-top: 1rem;
+		text-decoration: none;
+		color: #0077cc;
+		font-weight: bold;
+	}
+</style> 

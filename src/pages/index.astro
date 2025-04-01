@@ -1,0 +1,95 @@
+---
+
+---
+
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="viewport" content="width=device-width" />
+		<meta name="generator" content={Astro.generator} />
+		<title>My Personal Site</title>
+	</head>
+	<body>
+		<header>
+			<nav>
+				<a href="/">Home</a>
+				<a href="/about">About</a>
+				<a href="/projects">Projects</a>
+			</nav>
+		</header>
+		<main>
+			<h1>Welcome to My Site</h1>
+			<p>This is my personal website built with Astro.</p>
+			
+			<div class="cta-buttons">
+				<a href="/about" class="cta-button">Learn About Me</a>
+				<a href="/projects" class="cta-button">View My Projects</a>
+			</div>
+		</main>
+		<footer>
+			<p>© 2023 - My Personal Website</p>
+		</footer>
+	</body>
+</html>
+
+<style>
+	body {
+		font-family: system-ui, sans-serif;
+		max-width: 1200px;
+		margin: 0 auto;
+		padding: 1rem;
+	}
+	
+	header {
+		margin-bottom: 2rem;
+	}
+	
+	nav {
+		display: flex;
+		gap: 1rem;
+	}
+	
+	nav a {
+		text-decoration: none;
+		color: #333;
+		font-weight: 500;
+		padding: 0.5rem;
+	}
+	
+	nav a:hover {
+		color: #0077cc;
+	}
+	
+	main {
+		margin-bottom: 2rem;
+	}
+	
+	.cta-buttons {
+		display: flex;
+		gap: 1rem;
+		margin-top: 2rem;
+	}
+	
+	.cta-button {
+		display: inline-block;
+		background-color: #0077cc;
+		color: white;
+		padding: 0.75rem 1.5rem;
+		border-radius: 4px;
+		text-decoration: none;
+		font-weight: bold;
+		transition: background-color 0.2s ease;
+	}
+	
+	.cta-button:hover {
+		background-color: #005fa3;
+	}
+	
+	footer {
+		margin-top: 4rem;
+		padding-top: 1rem;
+		border-top: 1px solid #eaeaea;
+		color: #666;
+	}
+</style>
