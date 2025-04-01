@@ -94,4 +94,4 @@ export interface StrapiAbout {
     createdAt: string;
     updatedAt: string;
   };
-} 
+}

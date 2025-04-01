@@ -8,86 +8,87 @@ const aboutData = await getAboutContent();
 
 // Fallback data based on CV text
 const fallbackAbout: StrapiAbout = {
-	id: 1,
-	attributes: {
-		title: "Professional Experience",
-		introduction: "I specialize in helping companies transform their web presence by building scalable and maintainable applications and modernizing existing legacy codebases. My background in startups has given me a passion for the challenge of developing products in dynamic, high-growth environments.",
-		skills: {
-			data: [
-				{ id: 1, attributes: { name: "TypeScript" } },
-				{ id: 2, attributes: { name: "Angular" } },
-				{ id: 3, attributes: { name: "RxJS" } },
-				{ id: 4, attributes: { name: "Webpack" } },
-				{ id: 5, attributes: { name: "React" } },
-				{ id: 6, attributes: { name: "Node.js" } }
-			] as StrapiSkill[]
-		},
-		experiences: {
-			data: [
-				{
-					id: 1,
-					attributes: {
-						position: "Senior Front-end Engineer",
-						company: "GoFreight",
-						startDate: "2021-10-01",
-						endDate: "2025-02-24",
-						description: [
-							"First dedicated web front-end engineer to reshape the legacy codebase",
-							"Enabled the transition of traditional multi-page architecture to modern SPA",
-							"Designed and implemented an internal library to bootstrap AngularJS and Angular within the same codebase",
-							"Enhanced developer productivity and code maintainability"
-						]
-					}
-				},
-				{
-					id: 2,
-					attributes: {
-						position: "Senior Front-end Engineer",
-						company: "aetherAI",
-						startDate: "2019-07-01",
-						endDate: "2021-10-01",
-						description: [
-							"Collaborated with machine learning engineers to deliver new features for an image-viewing web application",
-							"Scaffolded an internal new project using Feature-Sliced Design methodology",
-							"Reduced Sentry logs from 10k to 1k events daily",
-							"Identified and addressed key performance bottlenecks, reducing page loading time from 4s to 2s"
-						]
-					}
-				},
-				{
-					id: 3,
-					attributes: {
-						position: "Senior Front-end Engineer",
-						company: "KaiOS Technology",
-						startDate: "2017-01-01",
-						endDate: "2019-06-01",
-						description: [
-							"Developed mobile applications using web technologies on low-end mobile devices with restricted hardware resources",
-							"Migrated legacy System app to a modern toolchain (webpack, ES6, etc.)",
-							"Refactored the legacy Contact app from vanilla JavaScript to React"
-						]
-					}
-				},
-				{
-					id: 4,
-					attributes: {
-						position: "Full-stack Engineer",
-						company: "YoWoo Technology",
-						startDate: "2015-03-01",
-						endDate: "2016-05-01",
-						description: [
-							"Designed and built RESTful APIs for web, Android, and iOS applications, ensuring seamless integration and functionality across platforms",
-							"Utilized MongoDB on AWS EC2 to enhance data management and scalability",
-							"Implemented a microservices architecture to improve system flexibility and maintainability",
-							"Developed frontend features using AngularJS, enhancing user experience and interactivity"
-						]
-					}
-				}
-			] as StrapiExperience[]
-		},
-		createdAt: new Date().toISOString(),
-		updatedAt: new Date().toISOString()
-	}
+  id: 1,
+  attributes: {
+    title: 'Professional Experience',
+    introduction:
+      'I specialize in helping companies transform their web presence by building scalable and maintainable applications and modernizing existing legacy codebases. My background in startups has given me a passion for the challenge of developing products in dynamic, high-growth environments.',
+    skills: {
+      data: [
+        { id: 1, attributes: { name: 'TypeScript' } },
+        { id: 2, attributes: { name: 'Angular' } },
+        { id: 3, attributes: { name: 'RxJS' } },
+        { id: 4, attributes: { name: 'Webpack' } },
+        { id: 5, attributes: { name: 'React' } },
+        { id: 6, attributes: { name: 'Node.js' } },
+      ] as StrapiSkill[],
+    },
+    experiences: {
+      data: [
+        {
+          id: 1,
+          attributes: {
+            position: 'Senior Front-end Engineer',
+            company: 'GoFreight',
+            startDate: '2021-10-01',
+            endDate: '2025-02-24',
+            description: [
+              'First dedicated web front-end engineer to reshape the legacy codebase',
+              'Enabled the transition of traditional multi-page architecture to modern SPA',
+              'Designed and implemented an internal library to bootstrap AngularJS and Angular within the same codebase',
+              'Enhanced developer productivity and code maintainability',
+            ],
+          },
+        },
+        {
+          id: 2,
+          attributes: {
+            position: 'Senior Front-end Engineer',
+            company: 'aetherAI',
+            startDate: '2019-07-01',
+            endDate: '2021-10-01',
+            description: [
+              'Collaborated with machine learning engineers to deliver new features for an image-viewing web application',
+              'Scaffolded an internal new project using Feature-Sliced Design methodology',
+              'Reduced Sentry logs from 10k to 1k events daily',
+              'Identified and addressed key performance bottlenecks, reducing page loading time from 4s to 2s',
+            ],
+          },
+        },
+        {
+          id: 3,
+          attributes: {
+            position: 'Senior Front-end Engineer',
+            company: 'KaiOS Technology',
+            startDate: '2017-01-01',
+            endDate: '2019-06-01',
+            description: [
+              'Developed mobile applications using web technologies on low-end mobile devices with restricted hardware resources',
+              'Migrated legacy System app to a modern toolchain (webpack, ES6, etc.)',
+              'Refactored the legacy Contact app from vanilla JavaScript to React',
+            ],
+          },
+        },
+        {
+          id: 4,
+          attributes: {
+            position: 'Full-stack Engineer',
+            company: 'YoWoo Technology',
+            startDate: '2015-03-01',
+            endDate: '2016-05-01',
+            description: [
+              'Designed and built RESTful APIs for web, Android, and iOS applications, ensuring seamless integration and functionality across platforms',
+              'Utilized MongoDB on AWS EC2 to enhance data management and scalability',
+              'Implemented a microservices architecture to improve system flexibility and maintainability',
+              'Developed frontend features using AngularJS, enhancing user experience and interactivity',
+            ],
+          },
+        },
+      ] as StrapiExperience[],
+    },
+    createdAt: new Date().toISOString(),
+    updatedAt: new Date().toISOString(),
+  },
 };
 
 // Use Strapi data if available, otherwise use fallback
@@ -95,287 +96,310 @@ const about = aboutData || fallbackAbout;
 ---
 
 <MainLayout title="Professional Experience">
-	<section class="experience-section">
-		<h1>{about.attributes.title}</h1>
-		<p class="introduction">{about.attributes.introduction}</p>
+  <section class="experience-section">
+    <h1>{about.attributes.title}</h1>
+    <p class="introduction">{about.attributes.introduction}</p>
 
-		<div class="section-container">
-			<h2 class="section-title">Skills & Expertise</h2>
-			<ul class="skills-list">
-				{about.attributes.skills.data.map((skill: StrapiSkill) => (
-					<li><span class="skill-tag"><i class="fas fa-check-circle"></i> {skill.attributes.name}</span></li>
-				))}
-			</ul>
-		</div>
+    <div class="section-container">
+      <h2 class="section-title">Skills & Expertise</h2>
+      <ul class="skills-list">
+        {
+          about.attributes.skills.data.map((skill: StrapiSkill) => (
+            <li>
+              <span class="skill-tag">
+                <i class="fas fa-check-circle" /> {skill.attributes.name}
+              </span>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
 
-		<div class="section-container">
-			<h2 class="section-title">Work History</h2>
-			<div class="experience-timeline">
-				{about.attributes.experiences.data.map((exp: StrapiExperience) => (
-					<div class="experience-item">
-						<div class="experience-header">
-							<h3 class="company-title"><i class="fas fa-building"></i> {exp.attributes.position} at {exp.attributes.company}</h3>
-							{exp.attributes.startDate && (
-								<p class="experience-duration">
-									<i class="far fa-calendar-alt"></i> {new Date(exp.attributes.startDate).toLocaleDateString('en-US', {year: 'numeric', month: 'long'})} -
-									{exp.attributes.current ? 'Present' : exp.attributes.endDate && new Date(exp.attributes.endDate).toLocaleDateString('en-US', {year: 'numeric', month: 'long'})}
-								</p>
-							)}
-						</div>
-						<ul class="experience-description">
-							{Array.isArray(exp.attributes.description) ?
-								exp.attributes.description.map((item: string) => (
-									<li>{item}</li>
-								)) :
-								<li>{exp.attributes.description}</li>
-							}
-						</ul>
-					</div>
-				))}
-			</div>
-		</div>
-	</section>
+    <div class="section-container">
+      <h2 class="section-title">Work History</h2>
+      <div class="experience-timeline">
+        {
+          about.attributes.experiences.data.map((exp: StrapiExperience) => (
+            <div class="experience-item">
+              <div class="experience-header">
+                <h3 class="company-title">
+                  <i class="fas fa-building" /> {exp.attributes.position} at{' '}
+                  {exp.attributes.company}
+                </h3>
+                {exp.attributes.startDate && (
+                  <p class="experience-duration">
+                    <i class="far fa-calendar-alt" />{' '}
+                    {new Date(exp.attributes.startDate).toLocaleDateString('en-US', {
+                      year: 'numeric',
+                      month: 'long',
+                    })}{' '}
+                    -
+                    {exp.attributes.current
+                      ? 'Present'
+                      : exp.attributes.endDate &&
+                        new Date(exp.attributes.endDate).toLocaleDateString('en-US', {
+                          year: 'numeric',
+                          month: 'long',
+                        })}
+                  </p>
+                )}
+              </div>
+              <ul class="experience-description">
+                {Array.isArray(exp.attributes.description) ? (
+                  exp.attributes.description.map((item: string) => <li>{item}</li>)
+                ) : (
+                  <li>{exp.attributes.description}</li>
+                )}
+              </ul>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
 </MainLayout>
 
 <style>
-	.experience-section {
-		padding: 2rem 0;
-		max-width: var(--container-narrow);
-		margin: 0 auto;
-	}
+  .experience-section {
+    padding: 2rem 0;
+    max-width: var(--container-narrow);
+    margin: 0 auto;
+  }
 
-	.section-container {
-		margin-bottom: 3rem;
-	}
+  .section-container {
+    margin-bottom: 3rem;
+  }
 
-	.section-title {
-		position: relative;
-		padding-bottom: 0.5rem;
-		margin-bottom: 1.5rem;
-		font-size: clamp(1.4rem, 5vw, 1.75rem);
-		color: var(--primary-color);
-		display: flex;
-		align-items: center;
-		gap: 0.5rem;
-	}
+  .section-title {
+    position: relative;
+    padding-bottom: 0.5rem;
+    margin-bottom: 1.5rem;
+    font-size: clamp(1.4rem, 5vw, 1.75rem);
+    color: var(--primary-color);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
 
-	.section-title::after {
-		content: '';
-		position: absolute;
-		bottom: 0;
-		left: 0;
-		width: 60px;
-		height: 3px;
-		background-color: rgba(var(--primary-color-rgb), 0.6);
-	}
+  .section-title::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 60px;
+    height: 3px;
+    background-color: rgba(var(--primary-color-rgb), 0.6);
+  }
 
-	.introduction {
-		font-size: clamp(1rem, 3vw, 1.1rem);
-		line-height: 1.6;
-		max-width: 800px;
-		margin-bottom: 2.5rem;
-		color: var(--text-color-light);
-	}
+  .introduction {
+    font-size: clamp(1rem, 3vw, 1.1rem);
+    line-height: 1.6;
+    max-width: 800px;
+    margin-bottom: 2.5rem;
+    color: var(--text-color-light);
+  }
 
-	.skills-list {
-		display: flex;
-		flex-wrap: wrap;
-		gap: 0.75rem;
-		list-style: none;
-		padding: 0;
-		margin: 0;
-	}
+  .skills-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
 
-	.skill-tag {
-		background-color: rgba(var(--primary-color-rgb), 0.1);
-		color: var(--text-color);
-		padding: 0.5rem 1rem;
-		border-radius: var(--radius-sm);
-		font-size: 0.9rem;
-		font-weight: 500;
-		transition: background-color 0.3s ease, transform 0.2s ease;
-		display: flex;
-		align-items: center;
-		gap: 0.3rem;
-	}
+  .skill-tag {
+    background-color: rgba(var(--primary-color-rgb), 0.1);
+    color: var(--text-color);
+    padding: 0.5rem 1rem;
+    border-radius: var(--radius-sm);
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition:
+      background-color 0.3s ease,
+      transform 0.2s ease;
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+  }
 
-	.skill-tag i {
-		color: var(--primary-color);
-		font-size: 0.8rem;
-	}
+  .skill-tag i {
+    color: var(--primary-color);
+    font-size: 0.8rem;
+  }
 
-	.skill-tag:hover {
-		background-color: var(--accent-hover);
-		transform: translateY(-2px);
-	}
+  .skill-tag:hover {
+    background-color: var(--accent-hover);
+    transform: translateY(-2px);
+  }
 
-	.experience-timeline {
-		position: relative;
-	}
+  .experience-timeline {
+    position: relative;
+  }
 
-	.experience-timeline::before {
-		content: '';
-		position: absolute;
-		top: 0;
-		bottom: 0;
-		left: 0;
-		width: 2px;
-		background-color: var(--border-color);
-	}
+  .experience-timeline::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 2px;
+    background-color: var(--border-color);
+  }
 
-	.experience-item {
-		position: relative;
-		margin-bottom: 2.5rem;
-		padding-bottom: 2rem;
-		padding-left: 2rem;
-		border-bottom: 1px solid var(--border-color);
-	}
+  .experience-item {
+    position: relative;
+    margin-bottom: 2.5rem;
+    padding-bottom: 2rem;
+    padding-left: 2rem;
+    border-bottom: 1px solid var(--border-color);
+  }
 
-	.experience-item:last-child {
-		border-bottom: none;
-		margin-bottom: 0;
-	}
+  .experience-item:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+  }
 
-	.experience-item::before {
-		content: '\f0b1';
-		font-family: 'Font Awesome 5 Free';
-		font-weight: 900;
-		position: absolute;
-		top: 0.5rem;
-		left: -10px;
-		width: 20px;
-		height: 20px;
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		border-radius: 50%;
-		background-color: rgba(var(--primary-color-rgb), 0.85);
-		color: white;
-		font-size: 0.7rem;
-	}
+  .experience-item::before {
+    content: '\f0b1';
+    font-family: 'Font Awesome 5 Free';
+    font-weight: 900;
+    position: absolute;
+    top: 0.5rem;
+    left: -10px;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background-color: rgba(var(--primary-color-rgb), 0.85);
+    color: white;
+    font-size: 0.7rem;
+  }
 
-	.experience-header {
-		margin-bottom: 1rem;
-	}
+  .experience-header {
+    margin-bottom: 1rem;
+  }
 
-	.company-title {
-		margin-top: 0;
-		margin-bottom: 0.5rem;
-		color: var(--text-color);
-		font-size: clamp(1.1rem, 3vw, 1.3rem);
-		display: flex;
-		align-items: flex-start;
-		gap: 0.5rem;
-		line-height: 1.3;
-	}
+  .company-title {
+    margin-top: 0;
+    margin-bottom: 0.5rem;
+    color: var(--text-color);
+    font-size: clamp(1.1rem, 3vw, 1.3rem);
+    display: flex;
+    align-items: flex-start;
+    gap: 0.5rem;
+    line-height: 1.3;
+  }
 
-	.company-title i {
-		margin-top: 0.25rem;
-	}
+  .company-title i {
+    margin-top: 0.25rem;
+  }
 
-	.experience-duration {
-		font-style: italic;
-		color: var(--text-color-light);
-		margin: 0;
-		display: flex;
-		align-items: center;
-		gap: 0.3rem;
-		font-size: 0.9rem;
-	}
+  .experience-duration {
+    font-style: italic;
+    color: var(--text-color-light);
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+    font-size: 0.9rem;
+  }
 
-	.experience-description {
-		color: var(--text-color);
-		line-height: 1.8;
-		font-size: 1.1rem;
-		margin: 1rem 0;
-		padding: 0 1rem;
-		max-width: 800px;
-		margin-left: auto;
-		margin-right: auto;
-		list-style: none;
-	}
+  .experience-description {
+    color: var(--text-color);
+    line-height: 1.8;
+    font-size: 1.1rem;
+    margin: 1rem 0;
+    padding: 0 1rem;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+    list-style: none;
+  }
 
-	.experience-description li {
-		position: relative;
-		margin-bottom: 0.8rem;
-		line-height: 1.6;
-		padding-left: 1.5rem;
-	}
+  .experience-description li {
+    position: relative;
+    margin-bottom: 0.8rem;
+    line-height: 1.6;
+    padding-left: 1.5rem;
+  }
 
-	.experience-description li::before {
-		content: "•";
-		color: var(--primary-color);
-		font-weight: bold;
-		position: absolute;
-		left: 0;
-	}
+  .experience-description li::before {
+    content: '•';
+    color: var(--primary-color);
+    font-weight: bold;
+    position: absolute;
+    left: 0;
+  }
 
-	@media (max-width: 768px) {
-		.experience-section {
-			padding: 1rem 1rem 2rem;
-		}
+  @media (max-width: 768px) {
+    .experience-section {
+      padding: 1rem 1rem 2rem;
+    }
 
-		.experience-timeline::before {
-			left: -1rem;
-		}
+    .experience-timeline::before {
+      left: -1rem;
+    }
 
-		.experience-item {
-			padding-left: 1rem;
-		}
+    .experience-item {
+      padding-left: 1rem;
+    }
 
-		.experience-item::before {
-			left: -1.3rem;
-		}
+    .experience-item::before {
+      left: -1.3rem;
+    }
 
-		.company-title {
-			flex-wrap: wrap;
-		}
+    .company-title {
+      flex-wrap: wrap;
+    }
 
-		.experience-description {
-			font-size: 1rem;
-			line-height: 1.7;
-			padding: 0 0.5rem;
-		}
+    .experience-description {
+      font-size: 1rem;
+      line-height: 1.7;
+      padding: 0 0.5rem;
+    }
 
-		.experience-description li {
-			padding-left: 1.2rem;
-		}
-	}
+    .experience-description li {
+      padding-left: 1.2rem;
+    }
+  }
 
-	@media (max-width: 480px) {
-		.experience-section {
-			padding: 0.5rem 0.5rem 1.5rem;
-		}
+  @media (max-width: 480px) {
+    .experience-section {
+      padding: 0.5rem 0.5rem 1.5rem;
+    }
 
-		.section-title {
-			flex-wrap: wrap;
-		}
+    .section-title {
+      flex-wrap: wrap;
+    }
 
-		.experience-timeline::before {
-			left: -0.7rem;
-		}
+    .experience-timeline::before {
+      left: -0.7rem;
+    }
 
-		.experience-item {
-			padding-left: 0.7rem;
-			margin-bottom: 2rem;
-			padding-bottom: 1.5rem;
-		}
+    .experience-item {
+      padding-left: 0.7rem;
+      margin-bottom: 2rem;
+      padding-bottom: 1.5rem;
+    }
 
-		.experience-item::before {
-			left: -1rem;
-			width: 16px;
-			height: 16px;
-			font-size: 0.6rem;
-		}
+    .experience-item::before {
+      left: -1rem;
+      width: 16px;
+      height: 16px;
+      font-size: 0.6rem;
+    }
 
-		.experience-duration {
-			flex-wrap: wrap;
-		}
+    .experience-duration {
+      flex-wrap: wrap;
+    }
 
-		.experience-description {
-			font-size: 0.95rem;
-			line-height: 1.6;
-			padding: 0;
-		}
-	}
+    .experience-description {
+      font-size: 0.95rem;
+      line-height: 1.6;
+      padding: 0;
+    }
+  }
 </style>
