@@ -1,0 +1,7 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+Prefer pnpm over npm or yarn.
+Always commit in commitized-style.
