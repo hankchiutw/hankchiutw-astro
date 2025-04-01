@@ -173,21 +173,37 @@ import MainLayout from '../layouts/MainLayout.astro';
 		text-align: center;
 		min-width: 200px;
 		border: 2px solid var(--primary-color);
+		box-shadow: 0 2px 5px var(--shadow-color);
 	}
 
 	.cta-button:hover {
 		background-color: var(--primary-color-dark);
 		transform: translateY(-2px);
+		box-shadow: 0 4px 8px var(--shadow-color);
 	}
-	
+
 	.cta-button.secondary {
 		background-color: transparent;
 		color: var(--primary-color);
 	}
-	
+
 	.cta-button.secondary:hover {
 		background-color: var(--primary-color);
 		color: white;
+	}
+
+	/* Make sure dark theme has proper contrast for the secondary button */
+	:global(.dark-theme) .cta-button.secondary {
+		border-color: var(--primary-color);
+		color: var(--primary-color);
+	}
+
+	:global(.dark-theme) .cta-button {
+		box-shadow: 0 2px 8px rgba(0,0,0,0.4);
+	}
+
+	:global(.dark-theme) .cta-button:hover {
+		box-shadow: 0 4px 12px rgba(0,0,0,0.6);
 	}
 
 	/* Responsive */
