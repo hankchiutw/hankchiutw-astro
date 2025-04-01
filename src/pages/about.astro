@@ -6,18 +6,20 @@ import type { StrapiAbout, StrapiSkill, StrapiExperience } from '../lib/strapi.t
 // Fetch about page content at build time
 const aboutData = await getAboutContent();
 
-// Fallback data if Strapi is not available
+// Fallback data based on CV text
 const fallbackAbout: StrapiAbout = {
 	id: 1,
 	attributes: {
-		title: "About Me",
-		introduction: "Hello! I'm a developer passionate about building amazing web experiences.",
+		title: "About Me - Hank Chiu",
+		introduction: "A dedicated software engineer specializing in web front-end development, with valuable experience in back-end technologies. Committed to delivering high-quality solutions that align with business goals and enhance user experiences.",
 		skills: {
 			data: [
-				{ id: 1, attributes: { name: "Web Development" } },
-				{ id: 2, attributes: { name: "JavaScript/TypeScript" } },
-				{ id: 3, attributes: { name: "React" } },
-				{ id: 4, attributes: { name: "Astro" } }
+				{ id: 1, attributes: { name: "TypeScript" } },
+				{ id: 2, attributes: { name: "Angular" } },
+				{ id: 3, attributes: { name: "RxJS" } },
+				{ id: 4, attributes: { name: "Webpack" } },
+				{ id: 5, attributes: { name: "React" } },
+				{ id: 6, attributes: { name: "Node.js" } }
 			] as StrapiSkill[]
 		},
 		experiences: {
@@ -25,9 +27,31 @@ const fallbackAbout: StrapiAbout = {
 				{ 
 					id: 1, 
 					attributes: { 
-						position: "Web Developer",
-						company: "Tech Company",
-						description: "I have experience building modern, performant websites using the latest web technologies."
+						position: "Senior Front-end Engineer",
+						company: "GoFreight",
+						startDate: "2021-10-01",
+						current: true,
+						description: "First dedicated web front-end engineer to reshape the legacy codebase. Enabled the transition of traditional multi-page architecture to modern SPA. Designed and implemented an internal library to bootstrap AngularJS and Angular within the same codebase, enhancing developer productivity and code maintainability."
+					} 
+				},
+				{ 
+					id: 2, 
+					attributes: { 
+						position: "Senior Front-end Engineer",
+						company: "aetherAI",
+						startDate: "2019-07-01",
+						endDate: "2021-10-01",
+						description: "Collaborated with machine learning engineers to deliver new features for an image-viewing web application. Scaffolded an internal new project using Feature-Sliced Design methodology. Reduced Sentry logs from 10k to 1k events daily. Identified and addressed key performance bottlenecks, reducing page loading time from 4s to 2s."
+					} 
+				},
+				{ 
+					id: 3, 
+					attributes: { 
+						position: "Senior Front-end Engineer",
+						company: "KaiOS Technology",
+						startDate: "2017-01-01",
+						endDate: "2019-06-01",
+						description: "Developed mobile applications using web technologies on low-end mobile devices with restricted hardware resources. Migrated legacy System app to a modern toolchain (webpack, ES6, etc.). Refactored the legacy Contact app from vanilla JavaScript to React."
 					} 
 				}
 			] as StrapiExperience[]
@@ -45,18 +69,37 @@ const about = aboutData || fallbackAbout;
 	<h1>{about.attributes.title}</h1>
 	<p>{about.attributes.introduction}</p>
 	
-	<h2>Skills</h2>
+	<h2>Skills & Expertise</h2>
 	<ul>
 		{about.attributes.skills.data.map((skill: StrapiSkill) => (
 			<li>{skill.attributes.name}</li>
 		))}
 	</ul>
 	
-	<h2>Experience</h2>
+	<h2>Professional Experience</h2>
 	{about.attributes.experiences.data.map((exp: StrapiExperience) => (
-		<div>
+		<div class="experience-item">
 			<h3>{exp.attributes.position} at {exp.attributes.company}</h3>
+			{exp.attributes.startDate && (
+				<p class="experience-duration">
+					{new Date(exp.attributes.startDate).toLocaleDateString('en-US', {year: 'numeric', month: 'long'})} - 
+					{exp.attributes.current ? 'Present' : exp.attributes.endDate && new Date(exp.attributes.endDate).toLocaleDateString('en-US', {year: 'numeric', month: 'long'})}
+				</p>
+			)}
 			<p>{exp.attributes.description}</p>
 		</div>
 	))}
-</MainLayout> 
+</MainLayout>
+
+<style>
+	.experience-item {
+		margin-bottom: 2.5rem;
+	}
+	
+	.experience-duration {
+		font-style: italic;
+		color: #666;
+		margin-top: -0.5rem;
+		margin-bottom: 0.75rem;
+	}
+</style> 

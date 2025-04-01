@@ -69,7 +69,7 @@ export interface StrapiExperience {
   attributes: {
     position: string;
     company: string;
-    startDate?: string;
+    startDate: string;
     endDate?: string | null;
     current?: boolean;
     description: string;
