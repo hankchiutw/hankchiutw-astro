@@ -1,19 +1,62 @@
 ---
 import MainLayout from '../layouts/MainLayout.astro';
+import { getAboutContent } from '../lib/strapi';
+import type { StrapiAbout, StrapiSkill, StrapiExperience } from '../lib/strapi.types';
+
+// Fetch about page content at build time
+const aboutData = await getAboutContent();
+
+// Fallback data if Strapi is not available
+const fallbackAbout: StrapiAbout = {
+	id: 1,
+	attributes: {
+		title: "About Me",
+		introduction: "Hello! I'm a developer passionate about building amazing web experiences.",
+		skills: {
+			data: [
+				{ id: 1, attributes: { name: "Web Development" } },
+				{ id: 2, attributes: { name: "JavaScript/TypeScript" } },
+				{ id: 3, attributes: { name: "React" } },
+				{ id: 4, attributes: { name: "Astro" } }
+			] as StrapiSkill[]
+		},
+		experiences: {
+			data: [
+				{ 
+					id: 1, 
+					attributes: { 
+						position: "Web Developer",
+						company: "Tech Company",
+						description: "I have experience building modern, performant websites using the latest web technologies."
+					} 
+				}
+			] as StrapiExperience[]
+		},
+		createdAt: new Date().toISOString(),
+		updatedAt: new Date().toISOString()
+	}
+};
+
+// Use Strapi data if available, otherwise use fallback
+const about = aboutData || fallbackAbout;
 ---
 
 <MainLayout title="About Me">
-	<h1>About Me</h1>
-	<p>Hello! I'm a developer passionate about building amazing web experiences.</p>
+	<h1>{about.attributes.title}</h1>
+	<p>{about.attributes.introduction}</p>
 	
 	<h2>Skills</h2>
 	<ul>
-		<li>Web Development</li>
-		<li>JavaScript/TypeScript</li>
-		<li>React</li>
-		<li>Astro</li>
+		{about.attributes.skills.data.map((skill: StrapiSkill) => (
+			<li>{skill.attributes.name}</li>
+		))}
 	</ul>
 	
 	<h2>Experience</h2>
-	<p>I have experience building modern, performant websites using the latest web technologies.</p>
+	{about.attributes.experiences.data.map((exp: StrapiExperience) => (
+		<div>
+			<h3>{exp.attributes.position} at {exp.attributes.company}</h3>
+			<p>{exp.attributes.description}</p>
+		</div>
+	))}
 </MainLayout> 

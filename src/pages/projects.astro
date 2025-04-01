@@ -1,41 +1,84 @@
 ---
 import MainLayout from '../layouts/MainLayout.astro';
+import { getProjects } from '../lib/strapi';
+import type { StrapiProject } from '../lib/strapi.types';
+
+// Fetch projects data at build time
+const projects = await getProjects();
+
+// Fallback projects if Strapi data is not available
+const fallbackProjects: StrapiProject[] = [
+	{
+		id: 1,
+		attributes: {
+			title: "Personal Blog",
+			description: "A blog built with Astro featuring fast page loads and minimal JavaScript.",
+			projectUrl: "#",
+			technologies: {
+				data: [
+					{ id: 1, attributes: { name: "Astro" } },
+					{ id: 2, attributes: { name: "JavaScript" } },
+					{ id: 3, attributes: { name: "CSS" } }
+				]
+			},
+			createdAt: new Date().toISOString(),
+			updatedAt: new Date().toISOString()
+		}
+	},
+	{
+		id: 2,
+		attributes: {
+			title: "Portfolio Website",
+			description: "My personal portfolio showcasing my skills and projects.",
+			projectUrl: "#",
+			technologies: {
+				data: [
+					{ id: 4, attributes: { name: "React" } },
+					{ id: 5, attributes: { name: "TypeScript" } },
+					{ id: 6, attributes: { name: "Tailwind CSS" } }
+				]
+			},
+			createdAt: new Date().toISOString(),
+			updatedAt: new Date().toISOString()
+		}
+	},
+	{
+		id: 3,
+		attributes: {
+			title: "E-commerce App",
+			description: "A full-stack e-commerce application with user authentication and payment processing.",
+			projectUrl: "#",
+			technologies: {
+				data: [
+					{ id: 7, attributes: { name: "Next.js" } },
+					{ id: 8, attributes: { name: "MongoDB" } },
+					{ id: 9, attributes: { name: "Stripe API" } }
+				]
+			},
+			createdAt: new Date().toISOString(),
+			updatedAt: new Date().toISOString()
+		}
+	}
+];
+
+// Use Strapi data if available, otherwise use fallback
+const displayProjects = projects.length > 0 ? projects : fallbackProjects;
 ---
 
 <MainLayout title="My Projects">
 	<h1>My Projects</h1>
 	<div class="projects-grid">
-		<div class="project-card">
-			<h2>Personal Blog</h2>
-			<p>A blog built with Astro featuring fast page loads and minimal JavaScript.</p>
-			<div class="tech-stack">
-				<span>Astro</span>
-				<span>JavaScript</span>
-				<span>CSS</span>
+		{displayProjects.map((project) => (
+			<div class="project-card">
+				<h2>{project.attributes.title}</h2>
+				<p>{project.attributes.description}</p>
+				<div class="tech-stack">
+					{project.attributes.technologies.data.map((tech) => (
+						<span>{tech.attributes.name}</span>
+					))}
+				</div>
+				<a href={project.attributes.projectUrl} class="project-link">View Project</a>
 			</div>
-			<a href="#" class="project-link">View Project</a>
-		</div>
-		
-		<div class="project-card">
-			<h2>Portfolio Website</h2>
-			<p>My personal portfolio showcasing my skills and projects.</p>
-			<div class="tech-stack">
-				<span>React</span>
-				<span>TypeScript</span>
-				<span>Tailwind CSS</span>
-			</div>
-			<a href="#" class="project-link">View Project</a>
-		</div>
-		
-		<div class="project-card">
-			<h2>E-commerce App</h2>
-			<p>A full-stack e-commerce application with user authentication and payment processing.</p>
-			<div class="tech-stack">
-				<span>Next.js</span>
-				<span>MongoDB</span>
-				<span>Stripe API</span>
-			</div>
-			<a href="#" class="project-link">View Project</a>
-		</div>
+		))}
 	</div>
 </MainLayout> 
