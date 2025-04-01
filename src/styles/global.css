@@ -57,7 +57,37 @@ body {
   flex-direction: column;
   min-height: 100vh;
   padding: 0;
-  transition: background-color 0.3s ease, color 0.3s ease;
+  transition: background-color 0.5s ease, color 0.5s ease;
+}
+
+/* Page transition animations */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+main {
+  flex: 1;
+  padding: 2rem;
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto;
+  animation: fadeIn 0.5s ease-out;
+  will-change: opacity, transform;
+}
+
+/* Smooth transitions for all interactive elements */
+a, button, .project-card, .skill-tag, .cta-button, .theme-toggle {
+  transition: all 0.3s ease;
+}
+
+/* Preserve theme during page transitions */
+html {
+  transition: background-color 0.5s ease;
+}
+
+html.dark-theme {
+  background-color: var(--bg-color);
 }
 
 /* Theme toggle button */
@@ -97,14 +127,6 @@ header {
   justify-content: space-between;
   align-items: center;
   padding: 1rem 2rem;
-}
-
-main {
-  flex: 1;
-  padding: 2rem;
-  max-width: 1200px;
-  width: 100%;
-  margin: 0 auto;
 }
 
 footer {

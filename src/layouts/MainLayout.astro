@@ -1,5 +1,6 @@
 ---
 // MainLayout.astro
+import { ViewTransitions } from 'astro:transitions';
 const { title = "Hank Chiu - Web Front-End Expert" } = Astro.props;
 ---
 
@@ -10,6 +11,7 @@ const { title = "Hank Chiu - Web Front-End Expert" } = Astro.props;
 		<meta name="viewport" content="width=device-width" />
 		<meta name="generator" content={Astro.generator} />
 		<title>{title}</title>
+		<ViewTransitions />
 	</head>
 	<body>
 		<header>
@@ -23,7 +25,7 @@ const { title = "Hank Chiu - Web Front-End Expert" } = Astro.props;
 				<span class="theme-toggle-dark" style="display: none;">🌙</span>
 			</button>
 		</header>
-		<main>
+		<main transition:animate="fade">
 			<slot />
 		</main>
 		<footer>
@@ -37,11 +39,13 @@ const { title = "Hank Chiu - Web Front-End Expert" } = Astro.props;
 	const themeToggle = document.getElementById('theme-toggle');
 	const lightIcon = document.querySelector('.theme-toggle-light') as HTMLElement;
 	const darkIcon = document.querySelector('.theme-toggle-dark') as HTMLElement;
+	const htmlElement = document.documentElement;
 	
 	// Check if user previously set a preference
 	const savedTheme = localStorage.getItem('theme');
 	if (savedTheme === 'dark' && lightIcon && darkIcon) {
 		document.body.classList.add('dark-theme');
+		htmlElement.classList.add('dark-theme');
 		lightIcon.style.display = 'none';
 		darkIcon.style.display = 'inline';
 	}
@@ -49,6 +53,7 @@ const { title = "Hank Chiu - Web Front-End Expert" } = Astro.props;
 	// Toggle theme when button is clicked
 	themeToggle?.addEventListener('click', () => {
 		const isDarkTheme = document.body.classList.toggle('dark-theme');
+		htmlElement.classList.toggle('dark-theme');
 		
 		if (isDarkTheme && lightIcon && darkIcon) {
 			localStorage.setItem('theme', 'dark');
@@ -66,10 +71,24 @@ const { title = "Hank Chiu - Web Front-End Expert" } = Astro.props;
 		const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
 		if (prefersDark) {
 			document.body.classList.add('dark-theme');
+			htmlElement.classList.add('dark-theme');
 			lightIcon.style.display = 'none';
 			darkIcon.style.display = 'inline';
 		}
 	}
+
+	// Improve page transitions
+	document.addEventListener('astro:before-swap', (event) => {
+		// Pass the current theme to the next page
+		const currentTheme = localStorage.getItem('theme') || 
+			(window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+		
+		// Use the Astro view transition API to preserve theme state
+		if (currentTheme === 'dark') {
+			(event.newDocument as Document).documentElement.classList.add('dark-theme');
+			(event.newDocument as Document).body.classList.add('dark-theme');
+		}
+	});
 </script>
 
 <style is:global>
