@@ -11,49 +11,14 @@ const fallbackProjects: StrapiProject[] = [
   {
     id: 1,
     attributes: {
-      title: 'Personal Blog',
-      description: 'A blog built with Astro featuring fast page loads and minimal JavaScript.',
+      title: 'Personal Website',
+      description: 'A website built with Astro featuring fast page loads and minimal JavaScript.',
       projectUrl: '#',
       technologies: {
         data: [
           { id: 1, attributes: { name: 'Astro' } },
-          { id: 2, attributes: { name: 'JavaScript' } },
+          { id: 2, attributes: { name: 'TypeScript' } },
           { id: 3, attributes: { name: 'CSS' } },
-        ],
-      },
-      createdAt: new Date().toISOString(),
-      updatedAt: new Date().toISOString(),
-    },
-  },
-  {
-    id: 2,
-    attributes: {
-      title: 'Portfolio Website',
-      description: 'My personal portfolio showcasing my skills and projects.',
-      projectUrl: '#',
-      technologies: {
-        data: [
-          { id: 4, attributes: { name: 'React' } },
-          { id: 5, attributes: { name: 'TypeScript' } },
-          { id: 6, attributes: { name: 'Tailwind CSS' } },
-        ],
-      },
-      createdAt: new Date().toISOString(),
-      updatedAt: new Date().toISOString(),
-    },
-  },
-  {
-    id: 3,
-    attributes: {
-      title: 'E-commerce App',
-      description:
-        'A full-stack e-commerce application with user authentication and payment processing.',
-      projectUrl: '#',
-      technologies: {
-        data: [
-          { id: 7, attributes: { name: 'Next.js' } },
-          { id: 8, attributes: { name: 'MongoDB' } },
-          { id: 9, attributes: { name: 'Stripe API' } },
         ],
       },
       createdAt: new Date().toISOString(),
@@ -65,7 +30,7 @@ const fallbackProjects: StrapiProject[] = [
     attributes: {
       title: 'Copy as Link',
       description: "A simple Chrome extension that copies the selected text as a link to the current page's URL.",
-      projectUrl: 'https://github.com/hankchiutw/copy-as-link',
+      projectUrl: 'https://copy-as-link.vercel.app/',
       technologies: {
         data: [
           { id: 10, attributes: { name: 'Chrome Extension' } },
@@ -86,7 +51,6 @@ const fallbackProjects: StrapiProject[] = [
         data: [
           { id: 12, attributes: { name: 'TypeScript' } },
           { id: 13, attributes: { name: 'RxJS' } },
-          { id: 14, attributes: { name: 'Decorators' } },
         ],
       },
       createdAt: new Date().toISOString(),
@@ -103,8 +67,7 @@ const displayProjects = projects.length > 0 ? projects : fallbackProjects;
   <section class="projects-section">
     <h1>My Projects</h1>
     <p class="section-intro">
-      Here are some of the projects I've worked on. Each one represents different skills and
-      technologies I've mastered.
+      Here are some of the projects I've worked on. Each one represents different skills and technologies I've mastered.
     </p>
 
     <div class="projects-grid">
@@ -138,7 +101,6 @@ const displayProjects = projects.length > 0 ? projects : fallbackProjects;
   }
 
   .section-intro {
-    max-width: 800px;
     margin-bottom: 2rem;
     color: var(--text-color-light);
     font-size: clamp(1rem, 3vw, 1.1rem);
