@@ -60,6 +60,39 @@ const fallbackProjects: StrapiProject[] = [
       updatedAt: new Date().toISOString(),
     },
   },
+  {
+    id: 4,
+    attributes: {
+      title: 'Copy as Link',
+      description: "A simple Chrome extension that copies the selected text as a link to the current page's URL.",
+      projectUrl: 'https://github.com/hankchiutw/copy-as-link',
+      technologies: {
+        data: [
+          { id: 10, attributes: { name: 'Chrome Extension' } },
+          { id: 11, attributes: { name: 'JavaScript' } },
+        ],
+      },
+      createdAt: new Date().toISOString(),
+      updatedAt: new Date().toISOString(),
+    },
+  },
+  {
+    id: 5,
+    attributes: {
+      title: 'Subjectize',
+      description: 'TypeScript decorators for binding RxJS Subject with class properties.',
+      projectUrl: 'https://github.com/hankchiutw/subjectize',
+      technologies: {
+        data: [
+          { id: 12, attributes: { name: 'TypeScript' } },
+          { id: 13, attributes: { name: 'RxJS' } },
+          { id: 14, attributes: { name: 'Decorators' } },
+        ],
+      },
+      createdAt: new Date().toISOString(),
+      updatedAt: new Date().toISOString(),
+    },
+  },
 ];
 
 // Use Strapi data if available, otherwise use fallback
