@@ -1,0 +1,361 @@
+---
+import MainLayout from '../layouts/MainLayout.astro';
+import { getPosts } from '../lib/strapi';
+import type { StrapiPost, StrapiCategory } from '../lib/strapi.types';
+
+// Fetch posts data at build time
+const posts = await getPosts();
+
+// Fallback posts if Strapi data is not available
+const fallbackPosts: StrapiPost[] = [
+  {
+    id: 1,
+    attributes: {
+      title: 'Getting Started with Astro',
+      slug: 'getting-started-with-astro',
+      description:
+        'A guide to building static sites with Astro - the modern framework for content-focused websites.',
+      publishedAt: new Date(2023, 5, 15).toISOString(),
+      cover: {
+        data: {
+          attributes: {
+            name: 'astro-cover.jpg',
+            alternativeText: null,
+            caption: null,
+            width: 800,
+            height: 450,
+            formats: {
+              thumbnail: { url: 'https://picsum.photos/400/225' },
+              small: { url: 'https://picsum.photos/600/338' },
+              medium: { url: 'https://picsum.photos/700/394' },
+              large: { url: 'https://picsum.photos/800/450' },
+            },
+            url: 'https://picsum.photos/800/450',
+          },
+        },
+      },
+      author: {
+        data: {
+          id: 1,
+          attributes: {
+            name: 'Hank Chiu',
+          },
+        },
+      },
+      categories: {
+        data: [
+          { id: 1, attributes: { name: 'Web Development' } },
+          { id: 2, attributes: { name: 'Astro' } },
+        ],
+      },
+      createdAt: new Date(2023, 5, 15).toISOString(),
+      updatedAt: new Date(2023, 5, 15).toISOString(),
+    },
+  },
+  {
+    id: 2,
+    attributes: {
+      title: 'Writing Clean TypeScript Code',
+      slug: 'writing-clean-typescript-code',
+      description:
+        'Best practices and patterns for writing maintainable TypeScript code in your next project.',
+      publishedAt: new Date(2023, 4, 22).toISOString(),
+      cover: {
+        data: {
+          attributes: {
+            url: 'https://picsum.photos/800/451',
+            formats: {
+              thumbnail: { url: 'https://picsum.photos/400/226' },
+            },
+          },
+        },
+      },
+      author: {
+        data: {
+          attributes: {
+            name: 'Hank Chiu',
+          },
+        },
+      },
+      categories: {
+        data: [
+          { id: 3, attributes: { name: 'TypeScript' } },
+          { id: 4, attributes: { name: 'Coding' } },
+        ],
+      },
+    },
+  },
+  {
+    id: 3,
+    attributes: {
+      title: 'React Performance Optimization Techniques',
+      slug: 'react-performance-optimization',
+      description:
+        'A deep dive into improving the performance of your React applications with practical examples.',
+      publishedAt: new Date(2023, 3, 10).toISOString(),
+      cover: {
+        data: {
+          attributes: {
+            url: 'https://picsum.photos/800/452',
+            formats: {
+              thumbnail: { url: 'https://picsum.photos/400/227' },
+            },
+          },
+        },
+      },
+      author: {
+        data: {
+          attributes: {
+            name: 'Hank Chiu',
+          },
+        },
+      },
+      categories: {
+        data: [
+          { id: 5, attributes: { name: 'React' } },
+          { id: 6, attributes: { name: 'Performance' } },
+        ],
+      },
+    },
+  },
+];
+
+// Use Strapi data if available, otherwise use fallback
+const displayPosts = posts.length > 0 ? posts : fallbackPosts;
+
+// Format the date for display
+function formatDate(dateString: string): string {
+  const date = new Date(dateString);
+  return date.toLocaleDateString('en-US', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+  });
+}
+---
+
+<MainLayout title="Writings">
+  <section class="writings-section">
+    <h1>Writings</h1>
+    <p class="section-intro">
+      My thoughts, tutorials, and insights on web development, technology, and programming.
+    </p>
+
+    <div class="writings-grid">
+      {
+        displayPosts.map((post: StrapiPost) => (
+          <article class="post-card">
+            <a href={`/writings/${post.attributes.slug}`} class="post-image-link">
+              <div class="post-image">
+                {post.attributes.cover?.data && (
+                  <img
+                    src={
+                      post.attributes.cover.data.attributes.formats.thumbnail.url ||
+                      post.attributes.cover.data.attributes.url
+                    }
+                    alt={post.attributes.title}
+                    loading="lazy"
+                  />
+                )}
+              </div>
+            </a>
+            <div class="post-content">
+              <div class="post-meta">
+                <span class="post-date">
+                  <i class="far fa-calendar-alt" /> {formatDate(post.attributes.publishedAt)}
+                </span>
+                {post.attributes.categories?.data && (
+                  <div class="post-categories">
+                    {post.attributes.categories.data.map((category: StrapiCategory) => (
+                      <span class="category-tag">
+                        <i class="fas fa-tag" /> {category.attributes.name}
+                      </span>
+                    ))}
+                  </div>
+                )}
+              </div>
+              <h2 class="post-title">
+                <a href={`/writings/${post.attributes.slug}`}>{post.attributes.title}</a>
+              </h2>
+              <p class="post-excerpt">{post.attributes.description}</p>
+              <a href={`/writings/${post.attributes.slug}`} class="read-more">
+                Read more <i class="fas fa-arrow-right" />
+              </a>
+            </div>
+          </article>
+        ))
+      }
+    </div>
+  </section>
+</MainLayout>
+
+<style>
+  .writings-section {
+    padding: 2rem 0;
+    max-width: var(--container-max);
+    margin: 0 auto;
+  }
+
+  .section-intro {
+    margin-bottom: 2rem;
+    color: var(--text-color-light);
+    font-size: clamp(1rem, 3vw, 1.1rem);
+    line-height: 1.6;
+  }
+
+  .writings-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+  }
+
+  .post-card {
+    background-color: var(--card-bg);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    box-shadow: 0 4px 10px var(--shadow-color);
+    transition:
+      transform 0.3s ease,
+      box-shadow 0.3s ease;
+    border: 1px solid var(--border-color);
+    display: flex;
+    flex-direction: column;
+  }
+
+  @media (min-width: 768px) {
+    .post-card {
+      flex-direction: row;
+      align-items: stretch;
+    }
+
+    .post-image-link {
+      flex: 0 0 33%;
+    }
+  }
+
+  .post-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px var(--shadow-color);
+  }
+
+  .post-image {
+    height: 200px;
+    overflow: hidden;
+  }
+
+  @media (min-width: 768px) {
+    .post-image {
+      height: 100%;
+    }
+  }
+
+  .post-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+  }
+
+  .post-card:hover .post-image img {
+    transform: scale(1.05);
+  }
+
+  .post-content {
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+  }
+
+  .post-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-bottom: 0.8rem;
+    font-size: 0.85rem;
+    color: var(--text-color-light);
+  }
+
+  .post-date {
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+  }
+
+  .post-categories {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .category-tag {
+    background-color: rgba(var(--primary-color-rgb), 0.1);
+    color: var(--text-color);
+    padding: 0.2rem 0.5rem;
+    border-radius: var(--radius-sm);
+    font-size: 0.75rem;
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+  }
+
+  .category-tag i {
+    font-size: 0.7rem;
+    color: var(--primary-color);
+  }
+
+  .post-title {
+    margin: 0 0 0.8rem;
+    font-size: clamp(1.2rem, 3vw, 1.5rem);
+    line-height: 1.3;
+  }
+
+  .post-title a {
+    text-decoration: none;
+    color: var(--primary-color);
+    transition: color 0.3s ease;
+  }
+
+  .post-title a:hover {
+    color: var(--primary-color-dark);
+  }
+
+  .post-excerpt {
+    margin-bottom: 1.5rem;
+    font-size: clamp(0.9rem, 2vw, 1rem);
+    line-height: 1.6;
+    color: var(--text-color);
+    flex-grow: 1;
+  }
+
+  .read-more {
+    align-self: flex-start;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    text-decoration: none;
+    color: var(--primary-color);
+    font-weight: 500;
+    transition: color 0.3s ease;
+  }
+
+  .read-more:hover {
+    color: var(--primary-color-dark);
+  }
+
+  .read-more i {
+    font-size: 0.8rem;
+    transition: transform 0.3s ease;
+  }
+
+  .read-more:hover i {
+    transform: translateX(3px);
+  }
+
+  /* Responsive adjustments */
+  @media (max-width: 768px) {
+    .writings-grid {
+      gap: 2rem;
+    }
+  }
+</style>

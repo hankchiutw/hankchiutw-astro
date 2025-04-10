@@ -30,6 +30,43 @@ export interface StrapiImage {
   };
 }
 
+export interface StrapiCategory {
+  id: number;
+  attributes: {
+    name: string;
+    slug?: string;
+  };
+}
+
+export interface StrapiAuthor {
+  id: number;
+  attributes: {
+    name: string;
+    bio?: string;
+    avatar?: StrapiImage;
+  };
+}
+
+export interface StrapiPost {
+  id: number;
+  attributes: {
+    title: string;
+    slug: string;
+    description: string;
+    content?: string;
+    publishedAt: string;
+    cover?: StrapiImage;
+    author?: {
+      data: StrapiAuthor;
+    };
+    categories?: {
+      data: StrapiCategory[];
+    };
+    createdAt: string;
+    updatedAt: string;
+  };
+}
+
 export interface StrapiTechnology {
   id: number;
   attributes: {
