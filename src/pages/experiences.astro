@@ -1,7 +1,7 @@
 ---
 import MainLayout from '../layouts/MainLayout.astro';
 import { getAboutContent } from '../lib/strapi';
-import type { StrapiAbout, StrapiSkill, StrapiExperience } from '../lib/strapi.types';
+import type { StrapiAbout, StrapiExperience, StrapiSkill } from '../lib/strapi.types';
 
 // Fetch about page content at build time
 const aboutData = await getAboutContent();

@@ -1,9 +1,9 @@
 import eslint from '@eslint/js';
-import tseslint from 'typescript-eslint';
-import astroPlugin from 'eslint-plugin-astro';
 import parser from 'astro-eslint-parser';
-import prettierPlugin from 'eslint-plugin-prettier';
 import prettierConfig from 'eslint-config-prettier';
+import astroPlugin from 'eslint-plugin-astro';
+import prettierPlugin from 'eslint-plugin-prettier';
+import tseslint from 'typescript-eslint';
 
 export default [
   eslint.configs.recommended,

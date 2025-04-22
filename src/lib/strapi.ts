@@ -1,7 +1,8 @@
+import qs from 'qs';
 import Strapi from 'strapi-sdk-js';
 import type { StrapiOptions } from 'strapi-sdk-js';
-import qs from 'qs';
-import type { StrapiProject, StrapiAbout } from './strapi.types';
+
+import type { StrapiAbout, StrapiProject } from './strapi.types';
 
 // Initialize Strapi client
 const strapiOptions: StrapiOptions = {
