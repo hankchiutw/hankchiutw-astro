@@ -1,8 +1,7 @@
-import qs from 'qs';
 import Strapi from 'strapi-sdk-js';
 import type { StrapiOptions } from 'strapi-sdk-js';
 
-import type { StrapiAbout, StrapiProject } from './strapi.types';
+import type { StrapiAbout, StrapiArticle, StrapiProject } from './strapi.types';
 
 // Initialize Strapi client
 const strapiOptions: StrapiOptions = {
@@ -29,25 +28,15 @@ const strapi = new Strapi(strapiOptions);
  */
 export async function getPosts(filters = {}) {
   try {
-    const query = qs.stringify(
-      {
-        populate: ['cover', 'author', 'categories'],
-        sort: ['publishedAt:desc'],
-        ...filters,
-      },
-      {
-        encodeValuesOnly: true,
-      }
-    );
+    const options = {
+      populate: ['tags'],
+      sort: ['publishedAt:desc'],
+      ...filters,
+    };
 
-    // @ts-ignore - The get method exists at runtime but TypeScript doesn't recognize it
-    const response = await strapi.get(`/posts?${query}`);
+    const response = await strapi.find<StrapiArticle>('articles', options);
 
-    if (response.data) {
-      return response.data;
-    }
-
-    return [];
+    return response.data || [];
   } catch (error) {
     console.error('Error fetching posts from Strapi:', error);
     return [];
@@ -59,27 +48,20 @@ export async function getPosts(filters = {}) {
  * @param {string} slug - Post slug
  * @returns {Promise<Object|null>} - Post data
  */
-export async function getPostBySlug(slug: string) {
+export async function getPostBySlug(slug: string): Promise<StrapiArticle | null> {
   try {
-    const query = qs.stringify(
-      {
-        filters: {
-          slug: {
-            $eq: slug,
-          },
+    const options = {
+      filters: {
+        slug: {
+          $eq: slug,
         },
-        populate: ['cover', 'author', 'categories', 'blocks'],
       },
-      {
-        encodeValuesOnly: true,
-      }
-    );
+    };
 
-    // @ts-ignore - The get method exists at runtime but TypeScript doesn't recognize it
-    const response = await strapi.get(`/posts?${query}`);
+    const response = await strapi.find<StrapiArticle>('articles', options);
 
-    if (response.data && response.data.length > 0) {
-      return response.data[0];
+    if (response.data) {
+      return response.data[0] || null;
     }
 
     return null;

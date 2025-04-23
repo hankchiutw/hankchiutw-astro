@@ -1,137 +1,11 @@
 ---
 import MainLayout from '../layouts/MainLayout.astro';
+import { formatDate } from '../lib/format-date';
 import { getPosts } from '../lib/strapi';
-import type { StrapiCategory, StrapiPost } from '../lib/strapi.types';
+import type { StrapiArticle, StrapiTag } from '../lib/strapi.types';
 
 // Fetch posts data at build time
-const posts = await getPosts();
-
-// Fallback posts if Strapi data is not available
-const fallbackPosts: StrapiPost[] = [
-  {
-    id: 1,
-    attributes: {
-      title: 'Getting Started with Astro',
-      slug: 'getting-started-with-astro',
-      description:
-        'A guide to building static sites with Astro - the modern framework for content-focused websites.',
-      publishedAt: new Date(2023, 5, 15).toISOString(),
-      cover: {
-        data: {
-          attributes: {
-            name: 'astro-cover.jpg',
-            alternativeText: null,
-            caption: null,
-            width: 800,
-            height: 450,
-            formats: {
-              thumbnail: { url: 'https://picsum.photos/400/225' },
-              small: { url: 'https://picsum.photos/600/338' },
-              medium: { url: 'https://picsum.photos/700/394' },
-              large: { url: 'https://picsum.photos/800/450' },
-            },
-            url: 'https://picsum.photos/800/450',
-          },
-        },
-      },
-      author: {
-        data: {
-          id: 1,
-          attributes: {
-            name: 'Hank Chiu',
-          },
-        },
-      },
-      categories: {
-        data: [
-          { id: 1, attributes: { name: 'Web Development' } },
-          { id: 2, attributes: { name: 'Astro' } },
-        ],
-      },
-      createdAt: new Date(2023, 5, 15).toISOString(),
-      updatedAt: new Date(2023, 5, 15).toISOString(),
-    },
-  },
-  {
-    id: 2,
-    attributes: {
-      title: 'Writing Clean TypeScript Code',
-      slug: 'writing-clean-typescript-code',
-      description:
-        'Best practices and patterns for writing maintainable TypeScript code in your next project.',
-      publishedAt: new Date(2023, 4, 22).toISOString(),
-      cover: {
-        data: {
-          attributes: {
-            url: 'https://picsum.photos/800/451',
-            formats: {
-              thumbnail: { url: 'https://picsum.photos/400/226' },
-            },
-          },
-        },
-      },
-      author: {
-        data: {
-          attributes: {
-            name: 'Hank Chiu',
-          },
-        },
-      },
-      categories: {
-        data: [
-          { id: 3, attributes: { name: 'TypeScript' } },
-          { id: 4, attributes: { name: 'Coding' } },
-        ],
-      },
-    },
-  },
-  {
-    id: 3,
-    attributes: {
-      title: 'React Performance Optimization Techniques',
-      slug: 'react-performance-optimization',
-      description:
-        'A deep dive into improving the performance of your React applications with practical examples.',
-      publishedAt: new Date(2023, 3, 10).toISOString(),
-      cover: {
-        data: {
-          attributes: {
-            url: 'https://picsum.photos/800/452',
-            formats: {
-              thumbnail: { url: 'https://picsum.photos/400/227' },
-            },
-          },
-        },
-      },
-      author: {
-        data: {
-          attributes: {
-            name: 'Hank Chiu',
-          },
-        },
-      },
-      categories: {
-        data: [
-          { id: 5, attributes: { name: 'React' } },
-          { id: 6, attributes: { name: 'Performance' } },
-        ],
-      },
-    },
-  },
-];
-
-// Use Strapi data if available, otherwise use fallback
-const displayPosts = posts.length > 0 ? posts : fallbackPosts;
-
-// Format the date for display
-function formatDate(dateString: string): string {
-  const date = new Date(dateString);
-  return date.toLocaleDateString('en-US', {
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric',
-  });
-}
+const displayPosts = await getPosts();
 ---
 
 <MainLayout title="Writings">
@@ -143,42 +17,28 @@ function formatDate(dateString: string): string {
 
     <div class="writings-grid">
       {
-        displayPosts.map((post: StrapiPost) => (
+        displayPosts.map((post: StrapiArticle) => (
           <article class="post-card">
-            <a href={`/writings/${post.attributes.slug}`} class="post-image-link">
-              <div class="post-image">
-                {post.attributes.cover?.data && (
-                  <img
-                    src={
-                      post.attributes.cover.data.attributes.formats.thumbnail.url ||
-                      post.attributes.cover.data.attributes.url
-                    }
-                    alt={post.attributes.title}
-                    loading="lazy"
-                  />
-                )}
-              </div>
-            </a>
             <div class="post-content">
               <div class="post-meta">
                 <span class="post-date">
-                  <i class="far fa-calendar-alt" /> {formatDate(post.attributes.publishedAt)}
+                  <i class="far fa-calendar-alt" /> {formatDate(post.publishedAt)}
                 </span>
-                {post.attributes.categories?.data && (
+                {post.tags && (
                   <div class="post-categories">
-                    {post.attributes.categories.data.map((category: StrapiCategory) => (
+                    {post.tags.map((tag: StrapiTag) => (
                       <span class="category-tag">
-                        <i class="fas fa-tag" /> {category.attributes.name}
+                        <i class="fas fa-tag" /> {tag.name}
                       </span>
                     ))}
                   </div>
                 )}
               </div>
               <h2 class="post-title">
-                <a href={`/writings/${post.attributes.slug}`}>{post.attributes.title}</a>
+                <a href={`/writings/${post.slug}`}>{post.title}</a>
               </h2>
-              <p class="post-excerpt">{post.attributes.description}</p>
-              <a href={`/writings/${post.attributes.slug}`} class="read-more">
+              <p class="post-excerpt">{post.description}</p>
+              <a href={`/writings/${post.slug}`} class="read-more">
                 Read more <i class="fas fa-arrow-right" />
               </a>
             </div>

@@ -2,6 +2,26 @@
  * Type definitions for Strapi API data models
  */
 
+interface StrapiResourceCommon {
+  id: number;
+  createdAt: string;
+  updatedAt: string;
+  publishedAt: string;
+}
+
+export interface StrapiTag extends StrapiResourceCommon {
+  name: string;
+}
+
+export interface StrapiArticle extends StrapiResourceCommon {
+  documentId: string;
+  content: string;
+  title: string;
+  description: string;
+  slug: string;
+  tags: StrapiTag[];
+}
+
 export interface StrapiImage {
   data: {
     id: number;
@@ -27,43 +47,6 @@ export interface StrapiImage {
       };
       url: string;
     };
-  };
-}
-
-export interface StrapiCategory {
-  id: number;
-  attributes: {
-    name: string;
-    slug?: string;
-  };
-}
-
-export interface StrapiAuthor {
-  id: number;
-  attributes: {
-    name: string;
-    bio?: string;
-    avatar?: StrapiImage;
-  };
-}
-
-export interface StrapiPost {
-  id: number;
-  attributes: {
-    title: string;
-    slug: string;
-    description: string;
-    content?: string;
-    publishedAt: string;
-    cover?: StrapiImage;
-    author?: {
-      data: StrapiAuthor;
-    };
-    categories?: {
-      data: StrapiCategory[];
-    };
-    createdAt: string;
-    updatedAt: string;
   };
 }
 
