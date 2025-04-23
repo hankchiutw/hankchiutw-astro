@@ -6,14 +6,18 @@ import type { StrapiAbout, StrapiProject } from './strapi.types';
 
 // Initialize Strapi client
 const strapiOptions: StrapiOptions = {
-  url: process.env.STRAPI_API_URL || 'http://localhost:1337',
+  url: import.meta.env.STRAPI_API_URL || 'http://localhost:1337',
   prefix: '/api',
   store: {
     key: 'strapi_jwt',
     useLocalStorage: false,
     cookieOptions: { path: '/' },
   },
-  axiosOptions: {},
+  axiosOptions: {
+    headers: {
+      authorization: `Bearer ${import.meta.env.STRAPI_API_TOKEN}`,
+    },
+  },
 };
 
 const strapi = new Strapi(strapiOptions);
