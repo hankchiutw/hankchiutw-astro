@@ -21,26 +21,26 @@ const strapiOptions: StrapiOptions = {
 
 const strapi = new Strapi(strapiOptions);
 
+const errorHandler = (error: unknown) => {
+  console.error('Strapi error:', error);
+  return null;
+};
+
 /**
  * Fetch posts from Strapi with optional filters
  * @param {Object} filters - Query filters
  * @returns {Promise<Array>} - Posts data
  */
-export async function getPosts(filters = {}) {
-  try {
-    const options = {
-      populate: ['tags'],
-      sort: ['publishedAt:desc'],
-      ...filters,
-    };
+export async function getPosts(filters = {}): Promise<StrapiArticle[]> {
+  const options = {
+    populate: ['tags'],
+    sort: ['publishedAt:desc'],
+    ...filters,
+  };
 
-    const response = await strapi.find<StrapiArticle>('articles', options);
+  const response = await strapi.find<StrapiArticle>('articles', options).catch(errorHandler);
 
-    return response.data || [];
-  } catch (error) {
-    console.error('Error fetching posts from Strapi:', error);
-    return [];
-  }
+  return response?.data || [];
 }
 
 /**
@@ -49,26 +49,17 @@ export async function getPosts(filters = {}) {
  * @returns {Promise<Object|null>} - Post data
  */
 export async function getPostBySlug(slug: string): Promise<StrapiArticle | null> {
-  try {
-    const options = {
-      filters: {
-        slug: {
-          $eq: slug,
-        },
+  const options = {
+    filters: {
+      slug: {
+        $eq: slug,
       },
-    };
+    },
+  };
 
-    const response = await strapi.find<StrapiArticle>('articles', options);
+  const response = await strapi.find<StrapiArticle>('articles', options).catch(errorHandler);
 
-    if (response.data) {
-      return response.data[0] || null;
-    }
-
-    return null;
-  } catch (error) {
-    console.error(`Error fetching post with slug ${slug}:`, error);
-    return null;
-  }
+  return response?.data?.[0] || null;
 }
 
 /**
