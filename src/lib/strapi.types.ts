@@ -58,6 +58,7 @@ export interface StrapiTechnology {
   };
 }
 
+// TODO
 export interface StrapiProject {
   id: number;
   attributes: {
@@ -84,6 +85,7 @@ export interface StrapiSkill {
   };
 }
 
+// TODO
 export interface StrapiExperience {
   id: number;
   attributes: {
@@ -96,6 +98,7 @@ export interface StrapiExperience {
   };
 }
 
+// TODO
 export interface StrapiAbout {
   id: number;
   attributes: {
