@@ -1,0 +1,25 @@
+---
+import ArticleSlug from '../../components/article-slug.astro';
+import { getPostBySlug, getPosts } from '../../lib/strapi';
+
+export async function getStaticPaths() {
+  // Fetch all posts to generate static paths
+  const posts = await getPosts();
+  return posts.map((post) => ({
+    params: { slug: post.slug },
+  }));
+}
+
+const { slug } = Astro.params;
+const post = await getPostBySlug(slug);
+
+const displayPost = post || null;
+---
+
+{
+  displayPost ? (
+    <ArticleSlug data={displayPost} />
+  ) : (
+    <div class="post-not-found">Post not found</div>
+  )
+}

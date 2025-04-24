@@ -1,52 +1,44 @@
 import Strapi from 'strapi-sdk-js';
 import type { StrapiOptions } from 'strapi-sdk-js';
-import qs from 'qs';
-import type { StrapiProject, StrapiAbout } from './strapi.types';
+
+import type { StrapiAbout, StrapiArticle, StrapiExperience, StrapiProject } from './strapi.types';
 
 // Initialize Strapi client
 const strapiOptions: StrapiOptions = {
-  url: process.env.STRAPI_API_URL || 'http://localhost:1337',
+  url: import.meta.env.STRAPI_API_URL || 'http://localhost:1337',
   prefix: '/api',
   store: {
     key: 'strapi_jwt',
     useLocalStorage: false,
     cookieOptions: { path: '/' },
   },
-  axiosOptions: {},
+  axiosOptions: {
+    headers: {
+      authorization: `Bearer ${import.meta.env.STRAPI_API_TOKEN}`,
+    },
+  },
 };
 
 const strapi = new Strapi(strapiOptions);
 
+const errorHandler = (error: unknown) => {
+  console.error('lib/strapi error:', error);
+  return null;
+};
+
 /**
  * Fetch posts from Strapi with optional filters
- * @param {Object} filters - Query filters
- * @returns {Promise<Array>} - Posts data
  */
-export async function getPosts(filters = {}) {
-  try {
-    const query = qs.stringify(
-      {
-        populate: ['cover', 'author', 'categories'],
-        sort: ['publishedAt:desc'],
-        ...filters,
-      },
-      {
-        encodeValuesOnly: true,
-      }
-    );
+export async function getPosts(filters = {}): Promise<StrapiArticle[]> {
+  const options = {
+    populate: ['tags'],
+    sort: ['publishedAt:desc'],
+    ...filters,
+  };
 
-    // @ts-ignore - The get method exists at runtime but TypeScript doesn't recognize it
-    const response = await strapi.get(`/posts?${query}`);
+  const response = await strapi.find<StrapiArticle>('articles', options).catch(errorHandler);
 
-    if (response.data) {
-      return response.data;
-    }
-
-    return [];
-  } catch (error) {
-    console.error('Error fetching posts from Strapi:', error);
-    return [];
-  }
+  return response?.data || [];
 }
 
 /**
@@ -54,91 +46,56 @@ export async function getPosts(filters = {}) {
  * @param {string} slug - Post slug
  * @returns {Promise<Object|null>} - Post data
  */
-export async function getPostBySlug(slug: string) {
-  try {
-    const query = qs.stringify(
-      {
-        filters: {
-          slug: {
-            $eq: slug,
-          },
-        },
-        populate: ['cover', 'author', 'categories', 'blocks'],
+export async function getPostBySlug(slug: string): Promise<StrapiArticle | null> {
+  const options = {
+    filters: {
+      slug: {
+        $eq: slug,
       },
-      {
-        encodeValuesOnly: true,
-      }
-    );
+    },
+  };
 
-    // @ts-ignore - The get method exists at runtime but TypeScript doesn't recognize it
-    const response = await strapi.get(`/posts?${query}`);
+  const response = await strapi.find<StrapiArticle>('articles', options).catch(errorHandler);
 
-    if (response.data && response.data.length > 0) {
-      return response.data[0];
-    }
-
-    return null;
-  } catch (error) {
-    console.error(`Error fetching post with slug ${slug}:`, error);
-    return null;
-  }
+  return response?.data?.[0] || null;
 }
 
 /**
  * Fetch projects from Strapi
- * @returns {Promise<StrapiProject[]>} - Projects data
  */
+// TODO
 export async function getProjects(): Promise<StrapiProject[]> {
-  try {
-    const query = qs.stringify(
-      {
-        populate: ['thumbnail', 'technologies'],
-        sort: ['order:asc'],
-      },
-      {
-        encodeValuesOnly: true,
-      }
-    );
+  const options = {
+    sort: ['publishedAt:desc'],
+  };
 
-    // @ts-ignore - The get method exists at runtime but TypeScript doesn't recognize it
-    const response = await strapi.get(`/projects?${query}`);
+  const response = await strapi.find<StrapiProject>('projects', options).catch(errorHandler);
 
-    if (response.data) {
-      return response.data;
-    }
-
-    return [];
-  } catch (error) {
-    console.error('Error fetching projects from Strapi:', error);
-    return [];
-  }
+  return response?.data || [];
 }
 
 /**
- * Fetch about page content from Strapi
- * @returns {Promise<StrapiAbout|null>} - About page data
+ * Fetch experiences from Strapi
  */
+// TODO
 export async function getAboutContent(): Promise<StrapiAbout | null> {
-  try {
-    const query = qs.stringify(
-      {
-        populate: ['portrait', 'skills', 'experiences', 'education'],
-      },
-      {
-        encodeValuesOnly: true,
-      }
-    );
+  const options = {};
 
-    // @ts-ignore - The get method exists at runtime but TypeScript doesn't recognize it
-    const response = await strapi.get(`/about?${query}`);
+  const response = await strapi.find<StrapiAbout>('about', options).catch(errorHandler);
 
-    if (response.data) {
-      return response.data;
-    }
+  return response?.data?.[0] || null;
+}
 
-    return null;
-  } catch (error) {
-    console.error('Error fetching about content from Strapi:', error);
-    return null;
-  }
+/**
+ * Fetch experiences from Strapi
+ */
+// TODO
+export async function getExperiences(): Promise<StrapiExperience[] | null> {
+  const options = {
+    sort: ['publishedAt:desc'],
+  };
+
+  const response = await strapi.find<StrapiExperience>('experiences', options).catch(errorHandler);
+
+  return response?.data || [];
 }

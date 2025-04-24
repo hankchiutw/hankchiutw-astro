@@ -5,11 +5,13 @@
 Dedicated software engineer with expertise in web front-end development and valuable experience in back-end technologies. I continuously strive for elegant and efficient solutions while balancing business goals.
 
 ## Projects
+
 - [hankchiu.tw](https://hankchiu.tw) - My personal website, where I showcase my projects and skills.
 - [Copy as link](https://copy-as-link.vercel.app/) - A browser extension that allows you to copy the current page URL as a link.
 - [Subjectize](https://www.npmjs.com/package/subjectize) - A browser extension that allows you to create a subject from the current page URL.
 
 ## Technical Skills
+
 - TypeScript
 - Angular
 - RxJS
@@ -18,12 +20,14 @@ Dedicated software engineer with expertise in web front-end development and valu
 - Node.js
 
 ## Core Strengths
+
 - Strong architectural thinking
 - Clean code principles advocate
 - Code refactoring expert
 - Team mentoring
 
 ---
+
 # Archived content
 
 ## Tech Stack I used

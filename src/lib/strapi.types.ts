@@ -2,6 +2,26 @@
  * Type definitions for Strapi API data models
  */
 
+interface StrapiResourceCommon {
+  id: number;
+  createdAt: string;
+  updatedAt: string;
+  publishedAt: string;
+}
+
+export interface StrapiTag extends StrapiResourceCommon {
+  name: string;
+}
+
+export interface StrapiArticle extends StrapiResourceCommon {
+  documentId: string;
+  content: string;
+  title: string;
+  description: string;
+  slug: string;
+  tags: StrapiTag[];
+}
+
 export interface StrapiImage {
   data: {
     id: number;
@@ -38,6 +58,7 @@ export interface StrapiTechnology {
   };
 }
 
+// TODO
 export interface StrapiProject {
   id: number;
   attributes: {
@@ -64,6 +85,7 @@ export interface StrapiSkill {
   };
 }
 
+// TODO
 export interface StrapiExperience {
   id: number;
   attributes: {
@@ -76,6 +98,7 @@ export interface StrapiExperience {
   };
 }
 
+// TODO
 export interface StrapiAbout {
   id: number;
   attributes: {
