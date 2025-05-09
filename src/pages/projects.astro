@@ -1,67 +1,12 @@
 ---
 import MainLayout from '../layouts/MainLayout.astro';
 import { getProjects } from '../lib/strapi';
-import type { StrapiProject } from '../lib/strapi.types';
 
 // Fetch projects data at build time
 const projects = await getProjects();
 
-// Fallback projects if Strapi data is not available
-const fallbackProjects: StrapiProject[] = [
-  {
-    id: 1,
-    attributes: {
-      title: 'Personal Website',
-      description: 'A website built with Astro featuring fast page loads and minimal JavaScript.',
-      projectUrl: 'https://github.com/hankchiutw/hankchiutw-astro',
-      technologies: {
-        data: [
-          { id: 1, attributes: { name: 'Astro' } },
-          { id: 2, attributes: { name: 'TypeScript' } },
-          { id: 3, attributes: { name: 'CSS' } },
-        ],
-      },
-      createdAt: new Date().toISOString(),
-      updatedAt: new Date().toISOString(),
-    },
-  },
-  {
-    id: 4,
-    attributes: {
-      title: 'Copy as Link',
-      description:
-        "A simple Chrome extension that copies the selected text as a link to the current page's URL.",
-      projectUrl: 'https://copy-as-link.vercel.app/',
-      technologies: {
-        data: [
-          { id: 10, attributes: { name: 'Chrome Extension' } },
-          { id: 11, attributes: { name: 'JavaScript' } },
-        ],
-      },
-      createdAt: new Date().toISOString(),
-      updatedAt: new Date().toISOString(),
-    },
-  },
-  {
-    id: 5,
-    attributes: {
-      title: 'Subjectize',
-      description: 'TypeScript decorators for binding RxJS Subject with class properties.',
-      projectUrl: 'https://www.npmjs.com/package/subjectize',
-      technologies: {
-        data: [
-          { id: 12, attributes: { name: 'TypeScript' } },
-          { id: 13, attributes: { name: 'RxJS' } },
-        ],
-      },
-      createdAt: new Date().toISOString(),
-      updatedAt: new Date().toISOString(),
-    },
-  },
-];
-
 // Use Strapi data if available, otherwise use fallback
-const displayProjects = projects.length > 0 ? projects : fallbackProjects;
+const displayProjects = projects.length > 0 ? projects : [];
 ---
 
 <MainLayout title="My Projects">
@@ -75,16 +20,16 @@ const displayProjects = projects.length > 0 ? projects : fallbackProjects;
       {
         displayProjects.map((project) => (
           <div class="project-card">
-            <h2 class="project-title">{project.attributes.title}</h2>
-            <p class="project-description">{project.attributes.description}</p>
+            <h2 class="project-title">{project.title}</h2>
+            <p class="project-description">{project.description}</p>
             <div class="tech-stack">
-              {project.attributes.technologies.data.map((tech) => (
+              {project.skills.map(({ name }) => (
                 <span class="tech-tag">
-                  <i class="fas fa-code" /> {tech.attributes.name}
+                  <i class="fas fa-code" /> {name}
                 </span>
               ))}
             </div>
-            <a href={project.attributes.projectUrl} class="project-link">
+            <a href={project.url} class="project-link" target="_blank">
               <i class="fas fa-eye" /> View Project
             </a>
           </div>

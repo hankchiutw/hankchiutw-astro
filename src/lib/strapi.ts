@@ -63,9 +63,9 @@ export async function getPostBySlug(slug: string): Promise<StrapiArticle | null>
 /**
  * Fetch projects from Strapi
  */
-// TODO
 export async function getProjects(): Promise<StrapiProject[]> {
   const options = {
+    populate: ['skills'],
     sort: ['publishedAt:desc'],
   };
 

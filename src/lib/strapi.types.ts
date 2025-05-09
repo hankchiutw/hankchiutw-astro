@@ -22,6 +22,17 @@ export interface StrapiArticle extends StrapiResourceCommon {
   tags: StrapiTag[];
 }
 
+export interface StrapiSkill extends StrapiResourceCommon {
+  name: string;
+}
+
+export interface StrapiProject extends StrapiResourceCommon {
+  title: string;
+  description: string;
+  url: string;
+  skills: StrapiSkill[];
+}
+
 export interface StrapiImage {
   data: {
     id: number;
@@ -47,41 +58,6 @@ export interface StrapiImage {
       };
       url: string;
     };
-  };
-}
-
-export interface StrapiTechnology {
-  id: number;
-  attributes: {
-    name: string;
-    slug?: string;
-  };
-}
-
-// TODO
-export interface StrapiProject {
-  id: number;
-  attributes: {
-    title: string;
-    description: string;
-    slug?: string;
-    projectUrl: string;
-    thumbnail?: StrapiImage;
-    technologies: {
-      data: StrapiTechnology[];
-    };
-    featured?: boolean;
-    order?: number;
-    createdAt: string;
-    updatedAt: string;
-  };
-}
-
-export interface StrapiSkill {
-  id: number;
-  attributes: {
-    name: string;
-    level?: number;
   };
 }
 
