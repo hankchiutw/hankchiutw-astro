@@ -33,6 +33,11 @@ export interface StrapiProject extends StrapiResourceCommon {
   skills: StrapiSkill[];
 }
 
+export interface StrapiAbout extends StrapiResourceCommon {
+  title: string;
+  description: string;
+}
+
 export interface StrapiImage {
   data: {
     id: number;
@@ -71,26 +76,5 @@ export interface StrapiExperience {
     endDate?: string;
     current?: boolean;
     description: string | string[];
-  };
-}
-
-// TODO
-export interface StrapiAbout {
-  id: number;
-  attributes: {
-    title: string;
-    introduction: string;
-    portrait?: StrapiImage;
-    skills: {
-      data: StrapiSkill[];
-    };
-    experiences: {
-      data: StrapiExperience[];
-    };
-    education?: {
-      data: any[];
-    };
-    createdAt: string;
-    updatedAt: string;
   };
 }

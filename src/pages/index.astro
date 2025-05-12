@@ -1,5 +1,10 @@
 ---
+import { marked } from 'marked';
 import MainLayout from '../layouts/MainLayout.astro';
+import { getAbout } from '../lib/strapi';
+
+const about = await getAbout();
+const aboutHtml = marked.parse(about?.description || '');
 ---
 
 <MainLayout>
@@ -7,11 +12,9 @@ import MainLayout from '../layouts/MainLayout.astro';
     <div class="profile-container">
       <div class="profile-content">
         <h1 class="profile-name">Hank Chiu</h1>
-        <h2 class="profile-title">Web Front-End Expert</h2>
+        <h2 class="profile-title">{about?.title}</h2>
         <p class="profile-intro">
-          Dedicated software engineer with expertise in web front-end development and valuable
-          experience in back-end technologies. I continuously strive for elegant and efficient
-          solutions while balancing business goals.
+          <div set:html={aboutHtml} />
         </p>
       </div>
     </div>

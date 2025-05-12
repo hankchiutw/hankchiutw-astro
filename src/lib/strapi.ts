@@ -1,5 +1,5 @@
 import Strapi from 'strapi-sdk-js';
-import type { StrapiOptions } from 'strapi-sdk-js';
+import type { StrapiOptions, StrapiResponse } from 'strapi-sdk-js';
 
 import type { StrapiAbout, StrapiArticle, StrapiExperience, StrapiProject } from './strapi.types';
 
@@ -77,20 +77,17 @@ export async function getProjects(): Promise<StrapiProject[]> {
 /**
  * Fetch experiences from Strapi
  */
-// TODO
-export async function getAboutContent(): Promise<StrapiAbout | null> {
-  const options = {};
+export async function getAbout(): Promise<StrapiAbout | null> {
+  const response = await strapi.request<StrapiResponse<StrapiAbout>>('get', '/about').catch(errorHandler);
 
-  const response = await strapi.find<StrapiAbout>('about', options).catch(errorHandler);
-
-  return response?.data?.[0] || null;
+  return response?.data || null;
 }
 
 /**
  * Fetch experiences from Strapi
  */
 // TODO
-export async function getExperiences(): Promise<StrapiExperience[] | null> {
+export async function getExperiences(): Promise<StrapiExperience[]> {
   const options = {
     sort: ['publishedAt:desc'],
   };

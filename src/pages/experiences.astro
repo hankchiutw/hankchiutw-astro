@@ -1,13 +1,13 @@
 ---
 import MainLayout from '../layouts/MainLayout.astro';
-import { getAboutContent } from '../lib/strapi';
+// import { getExperiences } from '../lib/strapi';
 import type { StrapiAbout, StrapiExperience, StrapiSkill } from '../lib/strapi.types';
 
 // Fetch about page content at build time
-const aboutData = await getAboutContent();
+// const aboutData = await getExperiences();
 
 // Fallback data based on CV text
-const fallbackAbout: StrapiAbout = {
+const fallbackAbout: any = {
   id: 1,
   attributes: {
     title: 'Professional Experience',
@@ -92,7 +92,7 @@ const fallbackAbout: StrapiAbout = {
 };
 
 // Use Strapi data if available, otherwise use fallback
-const about = aboutData || fallbackAbout;
+const about = fallbackAbout;
 ---
 
 <MainLayout title="Professional Experience">
