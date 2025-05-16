@@ -32,7 +32,7 @@ const errorHandler = (error: unknown) => {
 export async function getPosts(filters = {}): Promise<StrapiArticle[]> {
   const options = {
     populate: ['tags'],
-    sort: ['publishedAt:desc'],
+    sort: ['createdAt:desc'],
     ...filters,
   };
 
@@ -66,7 +66,7 @@ export async function getPostBySlug(slug: string): Promise<StrapiArticle | null>
 export async function getProjects(): Promise<StrapiProject[]> {
   const options = {
     populate: ['skills'],
-    sort: ['publishedAt:desc'],
+    sort: ['createdAt:desc'],
   };
 
   const response = await strapi.find<StrapiProject>('projects', options).catch(errorHandler);
@@ -89,7 +89,7 @@ export async function getAbout(): Promise<StrapiAbout | null> {
 // TODO
 export async function getExperiences(): Promise<StrapiExperience[]> {
   const options = {
-    sort: ['publishedAt:desc'],
+    sort: ['createdAt:desc'],
   };
 
   const response = await strapi.find<StrapiExperience>('experiences', options).catch(errorHandler);
