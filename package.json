@@ -4,7 +4,8 @@
   "version": "0.1.0",
   "scripts": {
     "dev": "astro dev",
-    "build": "astro build",
+    "build": "astro build --mode preview",
+    "build:vercel": "vercel build --target preview",
     "preview": "astro preview",
     "astro": "astro",
     "format": "prettier --write .",
@@ -35,6 +36,7 @@
     "eslint-plugin-prettier": "^5.2.6",
     "prettier": "^3.5.3",
     "prettier-plugin-astro": "^0.14.1",
-    "typescript-eslint": "^8.29.1"
+    "typescript-eslint": "^8.29.1",
+    "vercel": "42.2.0"
   }
 }
