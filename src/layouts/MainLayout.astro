@@ -1,6 +1,4 @@
 ---
-import Analytics from '@vercel/analytics/astro';
-
 const { title = 'Home' } = Astro.props;
 ---
 
@@ -29,7 +27,6 @@ const { title = 'Home' } = Astro.props;
         document.documentElement.classList.add('dark-theme');
       }
     </script>
-    <Analytics />
   </head>
   <body>
     <header>
