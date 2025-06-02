@@ -5,10 +5,7 @@
   "scripts": {
     "dev": "astro dev",
     "build": "astro build --mode preview",
-    "build:vercel": "vercel build --target preview",
-    "build:vercel:prod": "vercel build --target production",
-    "deploy": "vercel deploy --prebuilt",
-    "deploy:prod": "vercel deploy --prebuilt --prod",
+    "deploy": "wrangler deploy",
     "preview": "astro preview",
     "astro": "astro",
     "format": "prettier --write .",
@@ -17,7 +14,6 @@
     "lint:fix": "eslint . --ext .js,.ts,.astro --fix"
   },
   "dependencies": {
-    "@vercel/analytics": "^1.5.0",
     "astro": "^5.5.6",
     "marked": "^15.0.9",
     "qs": "^6.14.0",
@@ -40,6 +36,6 @@
     "prettier": "^3.5.3",
     "prettier-plugin-astro": "^0.14.1",
     "typescript-eslint": "^8.29.1",
-    "vercel": "42.2.0"
+    "wrangler": "4.18.0"
   }
 }
