@@ -27,6 +27,15 @@ const { title = 'Home' } = Astro.props;
         document.documentElement.classList.add('dark-theme');
       }
     </script>
+    <!-- Google tag (gtag.js) -->
+    <script is:inline async src="https://www.googletagmanager.com/gtag/js?id=G-51SFN3R2XY"></script>
+    <script is:inline>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-51SFN3R2XY');
+    </script>
   </head>
   <body>
     <header>
